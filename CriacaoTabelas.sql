@@ -23,6 +23,7 @@ CREATE TABLE Nota_Fiscal(
 	id_nota_fiscal int PRIMARY KEY AUTO_INCREMENT,
     id_cliente int,
     data_emissao date not null,
+    valor_total double check(valor_total>=0),
     FOREIGN KEY(id_cliente) REFERENCES Cliente(id_cliente)
 );
 

@@ -11,7 +11,7 @@ package sistemadevendas.model;
  */
 public class Cliente {
     private int idCliente;
-    private int nomeCliente;
+    private String nomeCliente;
     private String email;
     private String telefone;
 
@@ -23,11 +23,11 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
-    public int getNomeCliente() {
+    public String getNomeCliente() {
         return nomeCliente;
     }
 
-    public void setNomeCliente(int nomeCliente) {
+    public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
     }
 

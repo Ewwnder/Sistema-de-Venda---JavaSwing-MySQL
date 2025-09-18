@@ -23,14 +23,19 @@ public class ClienteDAO {
         this.conn = this.conexao.getConexao();
     }
     
-    public void insert(Cliente cliente){
+    public void criarCliente(Cliente cliente){
         String sql = "INSERT INTO Cliente (nome_cliente, email, telefone) VALUES (?, ?, ?)";
         
-        try{
-            PreparedStatement stmt = this.conn.prepareStatement(sql);
-        }catch(SQLException e){
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Não foi possível inserir Cliente no banco de dados: " + e.getMessage());
+        try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
+            stmt.setString(1, cliente.getNomeCliente());
+            stmt.setString(2, cliente.getEmail());
+            stmt.setString(3, cliente.getTelefone());
+            
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso no banco de dados!");
+        } catch(SQLException e){
+            System.out.println("Erro ao inserir pessoa: " + e.getMessage());
         }
     }
     

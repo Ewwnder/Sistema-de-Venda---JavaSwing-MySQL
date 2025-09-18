@@ -7,7 +7,7 @@ package sistemadevendas.model;
 
 /**
  *
- * @author User
+ * @author Nicolas Ap
  */
 public class Cliente {
     private int idCliente;

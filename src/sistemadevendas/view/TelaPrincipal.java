@@ -130,6 +130,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtIdClienteMostrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnLimparCampos.setText("Limpar Campos");
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelClientesLayout = new javax.swing.GroupLayout(painelClientes);
         painelClientes.setLayout(painelClientesLayout);
@@ -237,6 +242,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnAdicionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarClienteActionPerformed
        
+        ClienteController clienteController = new ClienteController();
+        
+        String nome = txtNomeClienteMostrar.getText();
+        String email = txtEmailClienteMostrar.getText();
+        String telefone = txtTelefoneClienteMostrar.getText();
+        
+        if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de adicionar!");
+            return;
+        }
+        
+        Cliente novoCliente = new Cliente();
+        
+        novoCliente.setNomeCliente(nome);
+        novoCliente.setEmail(email);
+        novoCliente.setTelefone(telefone);
+        
+        clienteController.adicionarCliente(novoCliente);
+        
+        limparFormularioCliente();
     }//GEN-LAST:event_btnAdicionarClienteActionPerformed
 
     private void btnBuscarClientePorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClientePorIdActionPerformed
@@ -259,6 +284,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeClienteMostrarActionPerformed
 
+    private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
+        txtNomeClienteMostrar.setText("");
+        txtEmailClienteMostrar.setText("");
+        txtTelefoneClienteMostrar.setText("");
+    }//GEN-LAST:event_btnLimparCamposActionPerformed
+
+    private void limparFormularioCliente(){
+        txtNomeClienteMostrar.setText("");
+        txtEmailClienteMostrar.setText("");
+        txtTelefoneClienteMostrar.setText("");
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

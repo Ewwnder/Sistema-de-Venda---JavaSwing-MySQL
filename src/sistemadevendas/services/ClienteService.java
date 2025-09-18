@@ -23,4 +23,10 @@ public class ClienteService {
         return cliente;
         
     }
+    
+    public void adicionarCliente(Cliente cliente){
+        clienteDAO.criarCliente(cliente);
+    }
+
+
 }

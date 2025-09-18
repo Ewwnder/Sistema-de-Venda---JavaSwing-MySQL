@@ -1,17 +1,20 @@
 
 package sistemadevendas.util;
 
+import sistemadevendas.model.Cliente;
+
 /**
  *
- * @author User
+ * @author Nicolas Ap
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+       
+        Cliente c  = new Cliente();
+        c.setNomeCliente("Adilson Pestana");
+        c.setEmail("adilsonpestana@openai.com.br");
+        c.setTelefone("(11) 11111-1111");
     }
     
 }

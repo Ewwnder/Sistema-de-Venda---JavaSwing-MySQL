@@ -11,7 +11,7 @@ import sistemadevendas.exceptions.IdClienteInvalidoException;
 
 /**
  *
- * @author User
+ * @author Nicolas Ap
  */
 public class ClienteController {
     
@@ -33,8 +33,16 @@ public class ClienteController {
         } catch(Exception e){
             
             return null;
-        }
-        
-        
+        }  
     }
+    
+    public void adicionarCliente(Cliente cliente){
+        try{
+            clienteService.adicionarCliente(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso no banco de dados");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente: " + e.getMessage());
+        }
+    }
+    
 }

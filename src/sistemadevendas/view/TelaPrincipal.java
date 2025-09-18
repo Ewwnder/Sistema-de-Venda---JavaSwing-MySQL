@@ -259,7 +259,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         novoCliente.setEmail(email);
         novoCliente.setTelefone(telefone);
         
-        clienteController.adicionarCliente(novoCliente);
+       
+        clienteController.adicionarCliente(novoCliente);    
+          
+        
         
         limparFormularioCliente();
     }//GEN-LAST:event_btnAdicionarClienteActionPerformed

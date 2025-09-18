@@ -266,14 +266,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnBuscarClientePorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClientePorIdActionPerformed
         ClienteController clienteController = new ClienteController();
+
+        if(txtIdClienteBusca.getText().isEmpty() || txtIdClienteBusca.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NULO OU VAZIO!");
+            return;
+        }
         int id = Integer.parseInt(txtIdClienteBusca.getText());
 
-        if(txtIdClienteBusca.getText()=="" || txtIdClienteBusca.getText()==null){
-            JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NULO OU VAZIO!");
-        }
-       
         if(id<0){
-            JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NEGATIVO!");
+            JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NEGATIVO");
+            return;
         }
         
         try {

@@ -17,11 +17,8 @@ public class ClienteController {
     
     private ClienteService clienteService = new ClienteService();
     
-    public Cliente buscarClientePorId(int id) throws IdClienteInvalidoException{
+    public Cliente buscarClientePorId(int id){
         
-        if(id<0){
-            throw new IdClienteInvalidoException("Id não pode ser negativo");
-        }
         
         try{
             Cliente c = clienteService.buscarClientePorId(id);
@@ -30,8 +27,9 @@ public class ClienteController {
         } catch(RuntimeException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
-        } catch(Exception e){
-            
+        }
+        
+        catch(Exception e){
             return null;
         }
         

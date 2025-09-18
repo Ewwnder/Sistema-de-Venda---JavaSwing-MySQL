@@ -58,6 +58,7 @@ public class ClienteDAO {
         }catch(SQLException ex){
             throw new RuntimeException("Erro ao consultar cliente pro id: ", ex);
         }
+      
     }
     
 }

@@ -58,6 +58,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtIdClienteMostrar = new javax.swing.JTextField();
         btnLimparCampos = new javax.swing.JButton();
+        btnEditarClientes = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,11 +134,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         txtIdClienteMostrar.setBackground(new java.awt.Color(204, 204, 204));
         txtIdClienteMostrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtIdClienteMostrar.setEnabled(false);
 
         btnLimparCampos.setText("Limpar Campos");
         btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparCamposActionPerformed(evt);
+            }
+        });
+
+        btnEditarClientes.setText("Editar Cliente");
+        btnEditarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarClientesActionPerformed(evt);
             }
         });
 
@@ -173,9 +182,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(btnLimparCampos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnListarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAdicionarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnAdicionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoverClientes)))
                 .addGap(53, 53, 53))
         );
@@ -209,10 +220,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLimparCampos)
-                    .addComponent(btnListarCliente)
-                    .addComponent(btnAdicionarCliente)
+                    .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAdicionarCliente)
+                        .addComponent(btnListarCliente)
+                        .addComponent(btnEditarClientes))
                     .addComponent(btnRemoverClientes))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Clientes", painelClientes);
@@ -332,6 +345,41 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRemoverClientesActionPerformed
 
+    private void btnEditarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClientesActionPerformed
+        try{
+            if (txtIdClienteBusca.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Selecione o cliente que deseja editar");
+                return;
+            }
+            
+            int id = Integer.parseInt(txtIdClienteBusca.getText());
+            String nome = txtNomeClienteMostrar.getText();
+            String email = txtEmailClienteMostrar.getText();
+            String telefone = txtTelefoneClienteMostrar.getText();
+            
+            if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de editar!");
+                return;
+            }
+            
+            Cliente novoCliente = new Cliente();
+            novoCliente.setIdCliente(id);
+            novoCliente.setNomeCliente(nome);
+            novoCliente.setEmail(email);
+            novoCliente.setTelefone(telefone);
+            
+            ClienteController clienteController = new ClienteController();
+            clienteController.editarCliente(novoCliente);
+            
+            JOptionPane.showMessageDialog(this, "Cliente atualizado com sucesso!!!");
+            limparFormularioCliente();
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "ID inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover o cliente: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnEditarClientesActionPerformed
+
     private void limparFormularioCliente(){
         txtIdClienteMostrar.setText("");
         txtNomeClienteMostrar.setText("");
@@ -378,6 +426,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarCliente;
     private javax.swing.JButton btnBuscarClientePorId;
+    private javax.swing.JButton btnEditarClientes;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnListarCliente;
     private javax.swing.JButton btnRemoverClientes;

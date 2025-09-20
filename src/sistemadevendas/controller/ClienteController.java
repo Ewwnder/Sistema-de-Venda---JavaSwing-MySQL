@@ -45,16 +45,11 @@ public class ClienteController {
     
     
     public void removerCliente(int id){
-        try {
-            clienteService.removerCliente(id);
-            JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (RuntimeException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
+         clienteService.removerCliente(id);
+    }
+    
+    public void editarCliente(Cliente cliente){
+        clienteService.editarCliente(cliente);
     }
     
 }

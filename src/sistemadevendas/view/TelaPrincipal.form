@@ -168,9 +168,11 @@
                               <Component id="btnLimparCampos" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnListarCliente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAdicionarCliente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              <Component id="btnAdicionarCliente" min="-2" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnEditarClientes" min="-2" pref="110" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnRemoverClientes" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -215,11 +217,14 @@
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnLimparCampos" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnListarCliente" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnAdicionarCliente" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="btnAdicionarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnListarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnEditarClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="btnRemoverClientes" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <EmptySpace pref="113" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -300,6 +305,7 @@
                     <LineBorder/>
                   </Border>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnLimparCampos">
@@ -308,6 +314,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparCamposActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnEditarClientes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Editar Cliente"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarClientesActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

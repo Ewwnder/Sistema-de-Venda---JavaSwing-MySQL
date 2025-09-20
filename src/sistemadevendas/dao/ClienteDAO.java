@@ -80,4 +80,23 @@ public class ClienteDAO {
       
     }
     
+    public boolean editarCliente(Cliente cliente){
+        String sql = "UPDATE Cliente SET nome_cliente = ?, email = ?, telefone = ? WHERE id_cliente = ?";
+        
+        try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
+            
+            stmt.setString(1, cliente.getNomeCliente());
+            stmt.setString(2, cliente.getEmail());
+            stmt.setString(3, cliente.getTelefone());
+            stmt.setInt(4, cliente.getIdCliente());
+            
+            int att = stmt.executeUpdate();
+            return att>0;
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao editar cliente: " + e.getMessage());
+            return false;
+        }
+
+            
+    }
 }

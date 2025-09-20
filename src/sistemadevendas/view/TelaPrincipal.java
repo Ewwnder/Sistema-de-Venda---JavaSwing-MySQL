@@ -264,14 +264,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
         novoCliente.setEmail(email);
         novoCliente.setTelefone(telefone);
         
-        clienteController.adicionarCliente(novoCliente);
+       
+        clienteController.adicionarCliente(novoCliente);    
+          
+        
         
         limparFormularioCliente();
     }//GEN-LAST:event_btnAdicionarClienteActionPerformed
 
     private void btnBuscarClientePorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClientePorIdActionPerformed
         ClienteController clienteController = new ClienteController();
+
+        if(txtIdClienteBusca.getText().isEmpty() || txtIdClienteBusca.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NULO OU VAZIO!");
+            return;
+        }
         int id = Integer.parseInt(txtIdClienteBusca.getText());
+
+        if(id<0){
+            JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NEGATIVO");
+            return;
+        }
+        
         try {
             Cliente c = clienteController.buscarClientePorId(id);
             txtIdClienteMostrar.setText(String.valueOf(c.getIdCliente()));
@@ -279,8 +293,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             txtEmailClienteMostrar.setText(c.getEmail());
             txtTelefoneClienteMostrar.setText(c.getTelefone());
             
-        } catch (IdClienteInvalidoException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (Exception e){
+            System.out.println("Houve algum erro: " + e.getMessage());
         }
             
     }//GEN-LAST:event_btnBuscarClientePorIdActionPerformed

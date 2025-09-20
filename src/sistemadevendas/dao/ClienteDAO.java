@@ -77,6 +77,7 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "Erro ao remover o cliente: " + e.getMessage());
             return false;
         }
+      
     }
     
 }

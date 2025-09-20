@@ -15,7 +15,7 @@ public class Conexao {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bancodadosprogsql?useTimezone=true&serverTimezone=UTC", "root", "");
             System.out.println("Conexão realizada com sucesso!");
             return conn;
-        }catch(Exception e){        
+        } catch(Exception e){        
             e.printStackTrace();
             System.out.println("Não foi possível realizar a conexão");
             return null;

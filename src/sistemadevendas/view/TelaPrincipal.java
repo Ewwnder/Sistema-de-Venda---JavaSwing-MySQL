@@ -44,7 +44,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelProdutos = new javax.swing.JPanel();
         painelClientes = new javax.swing.JPanel();
         btnAdicionarCliente = new javax.swing.JButton();
-        btnEditarClientes = new javax.swing.JButton();
+        btnRemoverClientes = new javax.swing.JButton();
         btnBuscarClientePorId = new javax.swing.JButton();
         txtNomeClienteMostrar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -99,7 +99,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnEditarClientes.setText("Remover Cliente");
+        btnRemoverClientes.setText("Remover Cliente");
+        btnRemoverClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverClientesActionPerformed(evt);
+            }
+        });
 
         btnBuscarClientePorId.setText("Buscar Cliente");
         btnBuscarClientePorId.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +176,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAdicionarCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEditarClientes)))
+                        .addComponent(btnRemoverClientes)))
                 .addGap(53, 53, 53))
         );
         painelClientesLayout.setVerticalGroup(
@@ -206,7 +211,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnLimparCampos)
                     .addComponent(btnListarCliente)
                     .addComponent(btnAdicionarCliente)
-                    .addComponent(btnEditarClientes))
+                    .addComponent(btnRemoverClientes))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -285,12 +290,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeClienteMostrarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
+        txtIdClienteMostrar.setText("");
         txtNomeClienteMostrar.setText("");
         txtEmailClienteMostrar.setText("");
         txtTelefoneClienteMostrar.setText("");
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
+    private void btnRemoverClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverClientesActionPerformed
+        try{
+            String idString = txtIdClienteBusca.getText().trim();
+            
+            int id = Integer.parseInt(idString);
+            
+            int confirm = JOptionPane.showConfirmDialog(this, "Deseja remover mesmo o cliente?", "SIM", JOptionPane.YES_NO_OPTION);
+            
+            if (confirm==JOptionPane.YES_OPTION){
+                ClienteController clienteController = new ClienteController();
+                clienteController.removerCliente(id);
+                JOptionPane.showMessageDialog(this, "Cliente removido com sucesso!");
+                
+                limparFormularioCliente();
+            }
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Digite um número válido para o ID");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover o cliente: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnRemoverClientesActionPerformed
+
     private void limparFormularioCliente(){
+        txtIdClienteMostrar.setText("");
         txtNomeClienteMostrar.setText("");
         txtEmailClienteMostrar.setText("");
         txtTelefoneClienteMostrar.setText("");
@@ -335,9 +364,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarCliente;
     private javax.swing.JButton btnBuscarClientePorId;
-    private javax.swing.JButton btnEditarClientes;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnListarCliente;
+    private javax.swing.JButton btnRemoverClientes;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

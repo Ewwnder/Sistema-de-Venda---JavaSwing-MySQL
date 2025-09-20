@@ -171,7 +171,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnAdicionarCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnEditarClientes" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnRemoverClientes" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
@@ -217,7 +217,7 @@
                           <Component id="btnLimparCampos" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnListarCliente" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnAdicionarCliente" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnEditarClientes" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRemoverClientes" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="32" max="32767" attributes="0"/>
                   </Group>
@@ -233,10 +233,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarClienteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnEditarClientes">
+            <Component class="javax.swing.JButton" name="btnRemoverClientes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remover Cliente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverClientesActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnBuscarClientePorId">
               <Properties>

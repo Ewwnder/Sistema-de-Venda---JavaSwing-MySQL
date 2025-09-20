@@ -33,7 +33,6 @@ public class ClienteDAO {
             
             stmt.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso no banco de dados!");
         } catch(SQLException e){
             System.out.println("Erro ao inserir pessoa: " + e.getMessage());
         }
@@ -52,16 +51,31 @@ public class ClienteDAO {
            }
            
            Cliente c = new Cliente();
-                
-           rs.first();
+    
            c.setIdCliente(id);
            c.setNomeCliente(rs.getString("nome_cliente"));
            c.setEmail(rs.getString("email"));
            c.setTelefone(rs.getString("telefone"));
            return c;
             
-        }catch(SQLException ex){
-            throw new RuntimeException("Erro ao consultar cliente pro id: ", ex);
+        } catch(SQLException ex){
+            System.out.println("Erro ao buscar cliente por id: " + ex.getMessage());
+            return null;
+        }
+    }
+    
+    
+    public boolean removerCliente(int id){
+        String sql = "DELETE FROM Cliente WHERE id_cliente = ?";
+        
+        try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            int removido = stmt.executeUpdate();
+            return removido>0;
+ 
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao remover o cliente: " + e.getMessage());
+            return false;
         }
     }
     

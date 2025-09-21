@@ -3,6 +3,7 @@ package sistemadevendas.services;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import sistemadevendas.dao.ClienteDAO;
 import sistemadevendas.model.Cliente;
 
@@ -66,5 +67,9 @@ public class ClienteService {
         if (!success){
             throw new RuntimeException("Falha ao editar o cliente no banco.");
         }
+    }
+    
+    public List<Cliente> listarClientes(){
+        return clienteDAO.listarClientes();
     }
 }

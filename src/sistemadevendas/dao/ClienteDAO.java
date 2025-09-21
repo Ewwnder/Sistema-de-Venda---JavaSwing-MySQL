@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import sistemadevendas.model.Cliente;
 import sistemadevendas.util.Conexao;
@@ -97,6 +99,28 @@ public class ClienteDAO {
             return false;
         }
 
+    }
+    
+    public List<Cliente> listarClientes(){
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM Cliente";
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()){
             
+            while (rs.next()){
+                Cliente cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("id_cliente"));
+                cliente.setNomeCliente(rs.getString("nome_cliente"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setTelefone(rs.getString("telefone"));
+                clientes.add(cliente);
+            }
+            
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao listar clientes: " + e.getMessage());
+        }
+        
+        return clientes;
     }
 }

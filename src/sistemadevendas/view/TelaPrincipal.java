@@ -5,9 +5,11 @@
  */
 package sistemadevendas.view;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import sistemadevendas.controller.ClienteController;
 import sistemadevendas.exceptions.IdClienteInvalidoException;
 import sistemadevendas.model.Cliente;
@@ -23,6 +25,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        
+        listaClientes.setEnabledAt(2, false);
+        
     }
 
     /**
@@ -40,7 +45,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
+        listaClientes = new javax.swing.JTabbedPane();
         painelProdutos = new javax.swing.JPanel();
         painelClientes = new javax.swing.JPanel();
         btnAdicionarCliente = new javax.swing.JButton();
@@ -59,6 +64,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtIdClienteMostrar = new javax.swing.JTextField();
         btnLimparCampos = new javax.swing.JButton();
         btnEditarClientes = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaClientes = new javax.swing.JTable();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,20 +85,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Sistemas de Vendas - Ryzen Idiomas");
 
-        jTabbedPane3.setMaximumSize(new java.awt.Dimension(32767, 50000));
+        listaClientes.setMaximumSize(new java.awt.Dimension(32767, 50000));
 
         javax.swing.GroupLayout painelProdutosLayout = new javax.swing.GroupLayout(painelProdutos);
         painelProdutos.setLayout(painelProdutosLayout);
         painelProdutosLayout.setHorizontalGroup(
             painelProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 845, Short.MAX_VALUE)
+            .addGap(0, 691, Short.MAX_VALUE)
         );
         painelProdutosLayout.setVerticalGroup(
             painelProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 257, Short.MAX_VALUE)
         );
 
-        jTabbedPane3.addTab("Produtos", painelProdutos);
+        listaClientes.addTab("Produtos", painelProdutos);
 
         btnAdicionarCliente.setText("Adicionar cliente");
         btnAdicionarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +132,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel3.setText("ID:");
 
         btnListarCliente.setText("Listar Clientes");
+        btnListarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarClienteActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("E-mail:");
 
@@ -177,7 +189,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                                     .addComponent(txtIdClienteBusca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscarClientePorId)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 573, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(painelClientesLayout.createSequentialGroup()
                         .addComponent(btnLimparCampos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -228,20 +240,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(113, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Clientes", painelClientes);
+        listaClientes.addTab("Clientes", painelClientes);
+
+        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nome", "Email", "Telefone"
+            }
+        ));
+        jScrollPane2.setViewportView(tabelaClientes);
+
+        listaClientes.addTab("ListaClientes", jScrollPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(91, 91, 91))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(listaClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,11 +277,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addComponent(listaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane3.getAccessibleContext().setAccessibleName("Clientes");
+        listaClientes.getAccessibleContext().setAccessibleName("Clientes");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -380,6 +407,32 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarClientesActionPerformed
 
+    private void btnListarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarClienteActionPerformed
+        
+        try {
+        ClienteController clienteController = new ClienteController();
+        List<Cliente> clientes = clienteController.listarClientes();
+
+        DefaultTableModel modelo = (DefaultTableModel) tabelaClientes.getModel(); // Padrão q a internet recomenda, qualquer coisa trocar depois.
+        modelo.setRowCount(0);
+
+        for (Cliente c : clientes) {
+            modelo.addRow(new Object[]{
+                c.getIdCliente(),
+                c.getNomeCliente(),
+                c.getEmail(),
+                c.getTelefone()
+            });
+        }
+        
+        listaClientes.setEnabledAt(2, true);
+        listaClientes.setSelectedIndex(2);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao listar clientes: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnListarClienteActionPerformed
+
     private void limparFormularioCliente(){
         txtIdClienteMostrar.setText("");
         txtNomeClienteMostrar.setText("");
@@ -439,15 +492,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane listaClientes;
     private javax.swing.JPanel painelClientes;
     private javax.swing.JPanel painelProdutos;
+    private javax.swing.JTable tabelaClientes;
     private javax.swing.JTextField txtEmailClienteMostrar;
     private javax.swing.JTextField txtIdClienteBusca;
     private javax.swing.JTextField txtIdClienteMostrar;
     private javax.swing.JTextField txtNomeClienteMostrar;
     private javax.swing.JTextField txtTelefoneClienteMostrar;
     // End of variables declaration//GEN-END:variables
+
+    
 }

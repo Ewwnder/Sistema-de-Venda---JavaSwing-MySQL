@@ -3,28 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/model/Estoque.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/model/Cliente.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/model/NotaFiscal.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/view/ListagemClientes.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/exceptions/IdClienteInvalidoException.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/exceptions/ValidaClienteException.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/util/Conexao.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/dao/ProdutoDAO.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/dao/ClienteDAO.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/model/Produto.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/view/Clientes.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/view/Produtos.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/controller/ClienteController.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/model/ItemNotaFiscal.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/services/ProdutoService.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/util/Main.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/view/TelaPrincipal.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/controller/ProdutoController.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/exceptions/ProdutoExisteException.java</file>
             <file>file:/C:/Users/LucasMorais/Desktop/Sistema%20de%20Vendas%20-%20Prog%20BD/src/sistemadevendas/services/ClienteService.java</file>
-=======
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/view/TelaPrincipal.java</file>
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/dao/ClienteDAO.java</file>
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/model/Cliente.java</file>
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/util/Main.java</file>
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/services/ClienteService.java</file>
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/controller/ClienteController.java</file>
->>>>>>> 32e60be47036fa2b7763ce08c4e4226e0c2f32a7
         </group>
     </open-files>
 </project-private>

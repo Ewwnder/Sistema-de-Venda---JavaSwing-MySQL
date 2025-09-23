@@ -10,6 +10,7 @@ public class Produto {
     private String nomeProduto;
     private String descricao;
     private double precoVenda;
+    private int quantidade;
 
     public int getIdProduto() {
         return idProduto;
@@ -41,6 +42,14 @@ public class Produto {
 
     public void setPrecoVenda(double precoVenda) {
         this.precoVenda = precoVenda;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     

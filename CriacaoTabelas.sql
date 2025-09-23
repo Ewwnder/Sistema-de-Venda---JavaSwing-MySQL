@@ -9,15 +9,10 @@ CREATE TABLE Produto(
 	id_produto int primary key AUTO_INCREMENT,
     nome_produto varchar(200) not null,
     descricao varchar(255),
-    preco_venda decimal(10,2) not null
+    preco_venda decimal(10,2) not null,
+    quantidade int check(quantidade>0)
 );
 
-CREATE TABLE Estoque(
-    id_estoque int PRIMARY KEY AUTO_INCREMENT,
-    id_produto int,
-    qtd_estoque int not null,
-    FOREIGN KEY (id_produto) REFERENCES Produto(id_produto)
-);
 
 CREATE TABLE Nota_Fiscal(
 	id_nota_fiscal int PRIMARY KEY AUTO_INCREMENT,

@@ -52,6 +52,7 @@ public class Produtos extends javax.swing.JFrame {
         btnEditarProdutos = new javax.swing.JButton();
         txtPrecoVendaProdutoMostrar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        btnIrTelaPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +124,13 @@ public class Produtos extends javax.swing.JFrame {
 
         jLabel8.setText("Preço Venda:");
 
+        btnIrTelaPrincipal.setText("Voltar");
+        btnIrTelaPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIrTelaPrincipalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelClientesLayout = new javax.swing.GroupLayout(painelClientes);
         painelClientes.setLayout(painelClientesLayout);
         painelClientesLayout.setHorizontalGroup(
@@ -142,20 +150,20 @@ public class Produtos extends javax.swing.JFrame {
                             .addComponent(txtDescricaoProdutoMostrar)
                             .addComponent(txtNomeProdutoMostrar)
                             .addGroup(painelClientesLayout.createSequentialGroup()
-                                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(painelClientesLayout.createSequentialGroup()
-                                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtIdProdutoMostrar, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtIdProdutoBusca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnBuscarProdutoPorId))
-                                    .addGroup(painelClientesLayout.createSequentialGroup()
-                                        .addComponent(txtQuantidadeProdutoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(44, 44, 44)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtPrecoVendaProdutoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(txtQuantidadeProdutoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtPrecoVendaProdutoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(painelClientesLayout.createSequentialGroup()
+                                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtIdProdutoMostrar, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdProdutoBusca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscarProdutoPorId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnIrTelaPrincipal))))
                     .addGroup(painelClientesLayout.createSequentialGroup()
                         .addComponent(btnLimparCampos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -178,7 +186,8 @@ public class Produtos extends javax.swing.JFrame {
                         .addGap(6, 6, 6))
                     .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtIdProdutoBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscarProdutoPorId)))
+                        .addComponent(btnBuscarProdutoPorId)
+                        .addComponent(btnIrTelaPrincipal)))
                 .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdProdutoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -401,6 +410,14 @@ public class Produtos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarProdutosActionPerformed
 
+    private void btnIrTelaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrTelaPrincipalActionPerformed
+        TelaPrincipal telaPrincipal = new TelaPrincipal();
+
+        telaPrincipal.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_btnIrTelaPrincipalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -440,6 +457,7 @@ public class Produtos extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionarProduto;
     private javax.swing.JButton btnBuscarProdutoPorId;
     private javax.swing.JButton btnEditarProdutos;
+    private javax.swing.JButton btnIrTelaPrincipal;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnListarProdutos;
     private javax.swing.JButton btnRemoverProdutos;

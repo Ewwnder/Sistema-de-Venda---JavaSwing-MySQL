@@ -50,6 +50,7 @@ public class Clientes extends javax.swing.JFrame {
         txtIdClienteMostrar = new javax.swing.JTextField();
         btnLimparCampos = new javax.swing.JButton();
         btnEditarClientes = new javax.swing.JButton();
+        btnIrTelaPrincipal = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -117,6 +118,13 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
+        btnIrTelaPrincipal.setText("Voltar");
+        btnIrTelaPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIrTelaPrincipalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelClientesLayout = new javax.swing.GroupLayout(painelClientes);
         painelClientes.setLayout(painelClientesLayout);
         painelClientesLayout.setHorizontalGroup(
@@ -136,15 +144,16 @@ public class Clientes extends javax.swing.JFrame {
                             .addComponent(txtEmailClienteMostrar)
                             .addComponent(txtNomeClienteMostrar)
                             .addGroup(painelClientesLayout.createSequentialGroup()
-                                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelefoneClienteMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(painelClientesLayout.createSequentialGroup()
-                                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtIdClienteMostrar, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtIdClienteBusca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnBuscarClientePorId)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(txtTelefoneClienteMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(painelClientesLayout.createSequentialGroup()
+                                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtIdClienteMostrar, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdClienteBusca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscarClientePorId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnIrTelaPrincipal))))
                     .addGroup(painelClientesLayout.createSequentialGroup()
                         .addComponent(btnLimparCampos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -167,7 +176,8 @@ public class Clientes extends javax.swing.JFrame {
                         .addGap(6, 6, 6))
                     .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtIdClienteBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscarClientePorId)))
+                        .addComponent(btnBuscarClientePorId)
+                        .addComponent(btnIrTelaPrincipal)))
                 .addGap(22, 22, 22)
                 .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -372,6 +382,14 @@ public class Clientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarClientesActionPerformed
 
+    private void btnIrTelaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrTelaPrincipalActionPerformed
+        TelaPrincipal telaPrincipal = new TelaPrincipal();
+        
+        telaPrincipal.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_btnIrTelaPrincipalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,6 +429,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionarCliente;
     private javax.swing.JButton btnBuscarClientePorId;
     private javax.swing.JButton btnEditarClientes;
+    private javax.swing.JButton btnIrTelaPrincipal;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnListarCliente;
     private javax.swing.JButton btnRemoverClientes;

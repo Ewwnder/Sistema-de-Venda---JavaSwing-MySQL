@@ -119,7 +119,7 @@ public class ItemNotaFiscalDAO {
              }
              
         }catch(SQLException ex){
-            
+              JOptionPane.showMessageDialog(null, "Não foi possível listar os items da nota fiscal: " + ex.getMessage());
         }
         return items;
     }

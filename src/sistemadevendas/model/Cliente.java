@@ -47,6 +47,8 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    
+    public String toString() {
+         return nomeCliente; // 
+    }
     
 }

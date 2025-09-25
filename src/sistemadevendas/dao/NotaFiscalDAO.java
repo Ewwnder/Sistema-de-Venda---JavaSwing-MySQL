@@ -6,12 +6,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sistemadevendas.model.Cliente;
 import sistemadevendas.model.NotaFiscal;
+import sistemadevendas.model.Produto;
 import sistemadevendas.util.Conexao;
 
 /**
@@ -55,19 +57,26 @@ public class NotaFiscalDAO {
         }
     
     }     
-    public void criarNotaFiscal(NotaFiscal nf){
-        String sql = "INSERT INTO Nota_Fiscal(id_cliente, data_emissao, valor_total) VALUES (?, ?, ?)";
-        
-        try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
-            java.util.Date utilDate = new java.util.Date();
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            
+     public void criarNotaFiscal(NotaFiscal nf){
+        String sql = "INSERT INTO Nota_Fiscal(id_cliente, id_produto, quantidade, data_emissao, valor_total) VALUES (?, ?, ?, ?, ?)";
+    
+        try (PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+     
             stmt.setInt(1, nf.getCliente().getIdCliente());
-            stmt.setDate(2, sqlDate);
-            stmt.setDouble(3, 0.0);
-        }catch(SQLException ex){
+            stmt.setInt(2, nf.getProduto().getIdProduto());
+            stmt.setInt(3, nf.getQuantidade());
+            stmt.setDate(4, nf.getDataEmissao());
+            stmt.setDouble(5, nf.getValorTotal());
+
+          
+            stmt.executeUpdate();
+            
+           
+              
+         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Não foi possível criar uma nota Fiscal: " + ex.getMessage());
         }
+
     }
     
     public List<NotaFiscal> listarNotasFiscais(){
@@ -80,8 +89,13 @@ public class NotaFiscalDAO {
              while(rs.next()){
                  NotaFiscal nf = new NotaFiscal();
                  Cliente cliente = new Cliente();
+                 Produto produto = new Produto();
+                 produto.setIdProduto(rs.getInt("id_produto"));
                  cliente.setIdCliente(rs.getInt("id_cliente"));
+                 nf.setIdNotaFiscal(rs.getInt("id_nota_fiscal"));
                  nf.setCliente(cliente);
+                 nf.setProduto(produto);
+                 nf.setQuantidade(rs.getInt("quantidade"));
                  nf.setDataEmissao(rs.getDate("data_emissao"));
                  nf.setValorTotal(rs.getDouble("valor_total"));
                  

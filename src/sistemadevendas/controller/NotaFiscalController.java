@@ -46,7 +46,7 @@ public class NotaFiscalController {
         try{
             List<NotaFiscal> lista_nf = new ArrayList<NotaFiscal>();
             lista_nf = notaFiscalService.listarNotasFiscais();
-            JOptionPane.showMessageDialog(null, "Listagem feita com sucesso! Danadinho");
+            
             
             return lista_nf;
         }catch(Exception e){

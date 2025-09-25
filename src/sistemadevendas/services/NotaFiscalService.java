@@ -6,6 +6,7 @@
 package sistemadevendas.services;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import sistemadevendas.dao.NotaFiscalDAO;
 import sistemadevendas.model.NotaFiscal;
 
@@ -18,15 +19,32 @@ public class NotaFiscalService {
     private NotaFiscalDAO nfDAO = new NotaFiscalDAO();
     
     public NotaFiscal buscarNotaFiscalPorId(int id) {
-        return nfDAO.buscarNotaFiscalPorId(id);
+        try{
+            return nfDAO.buscarNotaFiscalPorId(id);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao buscar nota: " +e.getMessage());
+            return null;
+        }
+        
     }
     
     public void criarNotaFiscal(NotaFiscal nf) {
-        nfDAO.criarNotaFiscal(nf);
+        try{
+             nfDAO.criarNotaFiscal(nf);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao criar nota fiscal " + e.getMessage());
+        }
+       
     }
 
     public List<NotaFiscal> listarNotasFiscais() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            return nfDAO.listarNotasFiscais();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao listar notas fiscais: " + e.getMessage());
+            return null;
+        }
+        
     }
     
 }

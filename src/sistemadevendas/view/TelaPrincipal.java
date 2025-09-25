@@ -154,7 +154,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIrProdutosActionPerformed
 
     private void btnIrNotaSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrNotaSaidaActionPerformed
-        // TODO add your handling code here:
+        NotaFiscalView nfView = new NotaFiscalView();
+        nfView.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnIrNotaSaidaActionPerformed
 
     /**

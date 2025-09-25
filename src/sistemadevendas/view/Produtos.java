@@ -93,7 +93,6 @@ public class Produtos extends javax.swing.JFrame {
         jLabel4.setText("ID:");
 
         btnListarProdutos.setText("Listar produtos");
-        btnListarProdutos.setEnabled(false);
         btnListarProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarProdutosActionPerformed(evt);
@@ -346,13 +345,13 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeProdutoMostrarActionPerformed
 
     private void btnListarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarProdutosActionPerformed
-        ListagemClientes listaClientesFrame = new ListagemClientes();
-        listaClientesFrame.setVisible(true);
+        ListagemProdutos listaProdutosFrame = new ListagemProdutos();
+        listaProdutosFrame.setVisible(true);
         try {
             ProdutoController produtoController = new ProdutoController();
             List<Produto> produtos = produtoController.listarProdutos();
 
-            DefaultTableModel modelo = (DefaultTableModel) listaClientesFrame.tabelaClientes.getModel(); // Padrão q a internet recomenda, qualquer coisa trocar depois.
+            DefaultTableModel modelo = (DefaultTableModel) listaProdutosFrame.tabelaProdutos.getModel(); // Padrão q a internet recomenda, qualquer coisa trocar depois.
             modelo.setRowCount(0);
 
             for (Produto p : produtos) {

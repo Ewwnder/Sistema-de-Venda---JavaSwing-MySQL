@@ -10,9 +10,28 @@ import java.sql.Date;
 public class NotaFiscal {
     private int idNotaFiscal;
     private Cliente cliente;
+    private Produto produto;
+    private int quantidade;
     private Date dataEmissao;
-    private double valorTotal;
+    private double valorTotal;  
 
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    
     public int getIdNotaFiscal() {
         return idNotaFiscal;
     }

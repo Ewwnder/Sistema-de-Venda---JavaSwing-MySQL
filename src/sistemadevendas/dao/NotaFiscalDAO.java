@@ -28,14 +28,41 @@ public class NotaFiscalDAO {
         this.conn = this.conexao.getConexao();
        }
     
-    public void criarNotaFiscal(Cliente cliente){
-        String sql = "INSERT INTO NotaFiscal(id_cliente, data_emissao, valor_total) VALUES (?, ?, ?)";
+    public NotaFiscal buscarNotaFiscalPorId(int id){
+        String sql = "SELECT * FROM Nota_Fiscal WHERE id_nota_fiscal = ?";
+        
+        try(PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if(!rs.first()){
+                return null;
+            }
+            NotaFiscal nf = new NotaFiscal();
+            Cliente cliente = new Cliente();
+            cliente.setIdCliente(rs.getInt("id_cliente"));
+            nf.setIdNotaFiscal(id);
+            nf.setCliente(cliente);
+            java.util.Date utilDate = rs.getDate("data_emissao");
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            nf.setDataEmissao(sqlDate);
+            nf.setValorTotal(rs.getDouble("valor_total"));
+            return nf;
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao buscar nota fiscal pelo id: " + ex.getMessage());
+            return null;
+        }
+    
+    }     
+    public void criarNotaFiscal(NotaFiscal nf){
+        String sql = "INSERT INTO Nota_Fiscal(id_cliente, data_emissao, valor_total) VALUES (?, ?, ?)";
         
         try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
             java.util.Date utilDate = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             
-            stmt.setInt(1, cliente.getIdCliente());
+            stmt.setInt(1, nf.getCliente().getIdCliente());
             stmt.setDate(2, sqlDate);
             stmt.setDouble(3, 0.0);
         }catch(SQLException ex){

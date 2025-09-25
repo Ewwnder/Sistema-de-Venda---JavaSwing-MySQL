@@ -1,6 +1,4 @@
-
 package sistemadevendas.model;
-
 /**
  *
  * @author LucasMorais

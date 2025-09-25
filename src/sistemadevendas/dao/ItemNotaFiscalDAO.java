@@ -79,7 +79,6 @@ public class ItemNotaFiscalDAO {
     
     public boolean atualizarQuantidadeItemNotaFiscal(ItemNotaFiscal itemNF, int quantidade){
         String sql = "UPDATE Item_Nota_Fiscal SET quantidade = ? WHERE id_item_nota_fiscal = ?";
-        
 
         try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
             stmt.setInt(1, quantidade);
@@ -120,6 +119,7 @@ public class ItemNotaFiscalDAO {
              
         }catch(SQLException ex){
               JOptionPane.showMessageDialog(null, "Não foi possível listar os items da nota fiscal: " + ex.getMessage());
+              
         }
         return items;
     }

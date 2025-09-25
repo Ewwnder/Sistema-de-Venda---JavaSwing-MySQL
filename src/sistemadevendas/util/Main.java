@@ -2,6 +2,7 @@
 package sistemadevendas.util;
 
 import sistemadevendas.model.Cliente;
+import sistemadevendas.view.TelaPrincipal;
 
 /**
  *
@@ -10,11 +11,8 @@ import sistemadevendas.model.Cliente;
 public class Main {
 
     public static void main(String[] args) {
-       
-        Cliente c  = new Cliente();
-        c.setNomeCliente("Adilson Pestana");
-        c.setEmail("adilsonpestana@openai.com.br");
-        c.setTelefone("(11) 11111-1111");
+       TelaPrincipal tela = new TelaPrincipal();
+       tela.setVisible(true);
     }
     
 }

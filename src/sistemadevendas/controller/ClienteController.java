@@ -1,7 +1,12 @@
 
 package sistemadevendas.controller;
 
+
 import java.util.List;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import sistemadevendas.model.Cliente;
 import sistemadevendas.services.ClienteService;
@@ -40,8 +45,7 @@ public class ClienteController {
             JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente: " + e.getMessage());
         }
     }
-    
-    
+       
     public void removerCliente(int id){
          clienteService.removerCliente(id);
     }

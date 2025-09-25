@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 package sistemadevendas.model;
+=======
+
+package sistemadevendas.model;
+
+>>>>>>> 06a105ef78c799da3adf5f026a472e721347c2b0
 /**
  *
  * @author LucasMorais
@@ -8,7 +14,10 @@ public class Produto {
     private String nomeProduto;
     private String descricao;
     private double precoVenda;
+<<<<<<< HEAD
     private int quantidade;
+=======
+>>>>>>> 06a105ef78c799da3adf5f026a472e721347c2b0
 
     public int getIdProduto() {
         return idProduto;
@@ -42,6 +51,7 @@ public class Produto {
         this.precoVenda = precoVenda;
     }
 
+<<<<<<< HEAD
     public int getQuantidade() {
         return quantidade;
     }
@@ -53,6 +63,8 @@ public class Produto {
     public String toString() {
         return nomeProduto;
     }
+=======
+>>>>>>> 06a105ef78c799da3adf5f026a472e721347c2b0
     
     
     

@@ -10,6 +10,7 @@ import java.sql.Date;
 public class NotaFiscal {
     private int idNotaFiscal;
     private Cliente cliente;
+<<<<<<< HEAD
     private Produto produto;
     private int quantidade;
     private Date dataEmissao;
@@ -32,6 +33,11 @@ public class NotaFiscal {
     }
 
     
+=======
+    private Date dataEmissao;
+    private double valorTotal;
+
+>>>>>>> 06a105ef78c799da3adf5f026a472e721347c2b0
     public int getIdNotaFiscal() {
         return idNotaFiscal;
     }

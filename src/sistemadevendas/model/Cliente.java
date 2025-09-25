@@ -47,8 +47,12 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+<<<<<<< HEAD
     public String toString() {
          return nomeCliente; // 
     }
+=======
+    
+>>>>>>> 06a105ef78c799da3adf5f026a472e721347c2b0
     
 }

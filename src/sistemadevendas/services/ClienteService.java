@@ -9,12 +9,7 @@ import java.util.List;
 import sistemadevendas.dao.ClienteDAO;
 import sistemadevendas.exceptions.ClienteExistenteException;
 import sistemadevendas.exceptions.ClienteNaoEncontradoException;
-import sistemadevendas.exceptions.FalhaAoBuscarClienteException;
-import sistemadevendas.exceptions.FalhaAoCadastrarClienteException;
-import sistemadevendas.exceptions.FalhaAoEditarClienteException;
-import sistemadevendas.exceptions.FalhaAoListarClientesException;
-import sistemadevendas.exceptions.FalhaAoRemoverClienteException;
-import sistemadevendas.exceptions.IdNegativoException;
+import sistemadevendas.exceptions.FalhaClienteException;
 import sistemadevendas.model.Cliente;
 
 /**
@@ -27,7 +22,7 @@ public class ClienteService {
        
     
     
-    public Cliente buscarClientePorId(int id) throws ClienteNaoEncontradoException, FalhaAoBuscarClienteException
+    public Cliente buscarClientePorId(int id) throws ClienteNaoEncontradoException, FalhaClienteException
     {
         Cliente cliente = clienteDAO.buscarPorId(id);
         
@@ -38,7 +33,7 @@ public class ClienteService {
         
     }
     
-    public void adicionarCliente(Cliente cliente) throws ClienteExistenteException, FalhaAoBuscarClienteException, FalhaAoCadastrarClienteException, FalhaAoCadastrarClienteException{
+    public void adicionarCliente(Cliente cliente) throws ClienteExistenteException, FalhaClienteException{
         
         if(clienteDAO.buscarPorEmail(cliente.getEmail())!=null){
             throw new ClienteExistenteException("Email do Cliente já existe na base de dados.");
@@ -50,7 +45,7 @@ public class ClienteService {
     }
 
 
-    public void removerCliente(int id) throws ClienteNaoEncontradoException, FalhaAoBuscarClienteException, FalhaAoRemoverClienteException{
+    public void removerCliente(int id) throws ClienteNaoEncontradoException, FalhaClienteException{
        
         
         boolean success = clienteDAO.removerCliente(id);
@@ -61,7 +56,7 @@ public class ClienteService {
         
     }
     
-    public void editarCliente(Cliente cliente) throws FalhaAoEditarClienteException, ClienteNaoEncontradoException, FalhaAoBuscarClienteException, ClienteExistenteException{
+    public void editarCliente(Cliente cliente) throws FalhaClienteException, ClienteNaoEncontradoException, ClienteExistenteException{
         
         Cliente existente = clienteDAO.buscarPorEmail(cliente.getEmail());
         
@@ -76,7 +71,7 @@ public class ClienteService {
         }
     }
     
-    public List<Cliente> listarClientes() throws FalhaAoListarClientesException{
+    public List<Cliente> listarClientes() throws FalhaClienteException{
         return clienteDAO.listarClientes();
     }
 

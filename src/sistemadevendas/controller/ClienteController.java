@@ -10,11 +10,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import sistemadevendas.exceptions.ClienteExistenteException;
 import sistemadevendas.exceptions.ClienteNaoEncontradoException;
-import sistemadevendas.exceptions.FalhaAoBuscarClienteException;
-import sistemadevendas.exceptions.FalhaAoCadastrarClienteException;
-import sistemadevendas.exceptions.FalhaAoEditarClienteException;
-import sistemadevendas.exceptions.FalhaAoListarClientesException;
-import sistemadevendas.exceptions.FalhaAoRemoverClienteException;
+import sistemadevendas.exceptions.FalhaClienteException;
 import sistemadevendas.model.Cliente;
 import sistemadevendas.services.ClienteService;
 import sistemadevendas.exceptions.IdNegativoException;
@@ -27,7 +23,7 @@ public class ClienteController {
     
     private ClienteService clienteService = new ClienteService();
     
-    public Cliente buscarClientePorId(int id) throws IdNegativoException, ClienteNaoEncontradoException, FalhaAoBuscarClienteException{
+    public Cliente buscarClientePorId(int id) throws IdNegativoException, ClienteNaoEncontradoException, FalhaClienteException{
         
         if(id<=0){
             throw new IdNegativoException("O Id não pode ser negativo.");
@@ -38,7 +34,7 @@ public class ClienteController {
        
     }
     
-    public void adicionarCliente(Cliente cliente) throws ClienteExistenteException, FalhaAoCadastrarClienteException, FalhaAoBuscarClienteException{
+    public void adicionarCliente(Cliente cliente) throws ClienteExistenteException, FalhaClienteException{
         
         if(cliente == null){
             throw new NullPointerException("O cliente que está sendo adicionado é nulo");
@@ -48,7 +44,7 @@ public class ClienteController {
         
     }
        
-    public void removerCliente(int id) throws IdNegativoException, ClienteNaoEncontradoException, FalhaAoBuscarClienteException, FalhaAoRemoverClienteException{
+    public void removerCliente(int id) throws IdNegativoException, ClienteNaoEncontradoException, FalhaClienteException{
         
         if(id<=0){
             throw new IdNegativoException("O Id não pode ser negativo.");
@@ -57,7 +53,7 @@ public class ClienteController {
          
     }
     
-    public void editarCliente(Cliente cliente) throws FalhaAoEditarClienteException, ClienteNaoEncontradoException, IdNegativoException, FalhaAoBuscarClienteException, ClienteExistenteException{
+    public void editarCliente(Cliente cliente) throws ClienteNaoEncontradoException, IdNegativoException, FalhaClienteException, ClienteExistenteException{
        
         if(cliente.getIdCliente()<=0){
             throw new IdNegativoException("O Id não pode ser negativo.");
@@ -66,7 +62,7 @@ public class ClienteController {
         clienteService.editarCliente(cliente);
     }
     
-    public List<Cliente> listarClientes() throws FalhaAoListarClientesException{
+    public List<Cliente> listarClientes() throws FalhaClienteException{
         return clienteService.listarClientes();
     }
     

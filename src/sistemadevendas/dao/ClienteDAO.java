@@ -8,12 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import sistemadevendas.exceptions.ClienteNaoEncontradoException;
-import sistemadevendas.exceptions.FalhaAoBuscarClienteException;
-import sistemadevendas.exceptions.FalhaAoCadastrarClienteException;
-import sistemadevendas.exceptions.FalhaAoEditarClienteException;
-import sistemadevendas.exceptions.FalhaAoListarClientesException;
-import sistemadevendas.exceptions.FalhaAoRemoverClienteException;
+
+import sistemadevendas.exceptions.FalhaClienteException;
 import sistemadevendas.model.Cliente;
 import sistemadevendas.util.Conexao;
 
@@ -31,7 +27,7 @@ public class ClienteDAO {
         this.conn = this.conexao.getConexao();
     }
     
-    public void criarCliente(Cliente cliente) throws FalhaAoCadastrarClienteException{
+    public void criarCliente(Cliente cliente) throws FalhaClienteException{
         String sql = "INSERT INTO Cliente (nome_cliente, email, telefone) VALUES (?, ?, ?)";
         
         try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
@@ -43,12 +39,12 @@ public class ClienteDAO {
            
 
         } catch(SQLException ex){
-            throw new FalhaAoCadastrarClienteException("Erro ao inserir cliente no banco: " + ex.getMessage(), ex);
+           throw new FalhaClienteException("Erro de SQL ao cadastrar - " + ex.getMessage(), ex);
           
         }
     }
     
-    public Cliente buscarPorId(int id) throws ClienteNaoEncontradoException, FalhaAoBuscarClienteException{
+    public Cliente buscarPorId(int id) throws FalhaClienteException{
         String sql = "SELECT * FROM Cliente WHERE id_cliente = ?";
         
         try{
@@ -72,11 +68,11 @@ public class ClienteDAO {
             
 
         } catch(SQLException ex){
-            throw new FalhaAoBuscarClienteException("Erro de SQL - " + ex.getMessage(), ex);
+            throw new FalhaClienteException("Erro de SQL ao buscar por id - " + ex.getMessage(), ex);
         }
     }
     
-    public Cliente buscarPorEmail(String email) throws FalhaAoBuscarClienteException{
+    public Cliente buscarPorEmail(String email) throws FalhaClienteException{
         String sql = "SELECT * FROM Cliente WHERE email = ?";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -95,13 +91,13 @@ public class ClienteDAO {
             c.setTelefone(rs.getString("telefone"));
             return c;
         }catch(SQLException ex){
-            throw new FalhaAoBuscarClienteException("Erro de SQL - " + ex.getMessage(), ex);
+           throw new FalhaClienteException("Erro de SQL ao buscar por email - " + ex.getMessage(), ex);
         
         }   
     }
     
     
-    public boolean removerCliente(int id) throws FalhaAoRemoverClienteException{
+    public boolean removerCliente(int id) throws FalhaClienteException{
         String sql = "DELETE FROM Cliente WHERE id_cliente = ?";
         
         try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
@@ -110,12 +106,12 @@ public class ClienteDAO {
             return removido>0;
  
         } catch (SQLException ex){
-            throw new FalhaAoRemoverClienteException("Erro de SQL - " + ex.getMessage(), ex);
+            throw new FalhaClienteException("Erro de SQL ao remover - " + ex.getMessage(), ex);
         }
 
     }
       
-    public boolean editarCliente(Cliente cliente) throws FalhaAoEditarClienteException{
+    public boolean editarCliente(Cliente cliente) throws FalhaClienteException{
         String sql = "UPDATE Cliente SET nome_cliente = ?, email = ?, telefone = ? WHERE id_cliente = ?";
         
         
@@ -129,12 +125,12 @@ public class ClienteDAO {
             int att = stmt.executeUpdate();
             return att>0;
         } catch(SQLException ex){
-            throw new FalhaAoEditarClienteException("Erro de SQL - " + ex.getMessage(), ex);   
+           throw new FalhaClienteException("Erro de SQL ao editar - " + ex.getMessage(), ex); 
         }
 
     }
     
-    public List<Cliente> listarClientes() throws FalhaAoListarClientesException{
+    public List<Cliente> listarClientes() throws FalhaClienteException{
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM Cliente";
         
@@ -151,7 +147,7 @@ public class ClienteDAO {
             }
             
         } catch (SQLException ex){
-            throw new FalhaAoListarClientesException("Erro de SQL - " + ex.getMessage(), ex);
+            throw new FalhaClienteException("Erro de SQL ao listar - " + ex.getMessage(), ex);
         }
         
         return clientes;

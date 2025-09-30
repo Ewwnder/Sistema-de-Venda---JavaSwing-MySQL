@@ -9,9 +9,9 @@ package sistemadevendas.exceptions;
  *
  * @author LucasMorais
  */
-public class FalhaAoListarClientesException extends Exception{
+public class FalhaClienteException extends Exception{
 
-    public FalhaAoListarClientesException(String message, Throwable ex) {
+    public FalhaClienteException(String message, Throwable ex) {
         super(message, ex);
     }
     

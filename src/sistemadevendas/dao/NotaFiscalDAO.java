@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import sistemadevendas.exceptions.FalhaNotaFiscalException;
 import sistemadevendas.model.Cliente;
 import sistemadevendas.model.NotaFiscal;
 import sistemadevendas.model.Produto;
@@ -30,7 +31,7 @@ public class NotaFiscalDAO {
         this.conn = this.conexao.getConexao();
        }
     
-    public NotaFiscal buscarNotaFiscalPorId(int id){
+    public NotaFiscal buscarNotaFiscalPorId(int id) throws FalhaNotaFiscalException{
         String sql = "SELECT * FROM Nota_Fiscal WHERE id_nota_fiscal = ?";
         
         try(PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)){
@@ -52,12 +53,12 @@ public class NotaFiscalDAO {
             return nf;
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao buscar nota fiscal pelo id: " + ex.getMessage());
-            return null;
+            throw new FalhaNotaFiscalException("Erro de SQL ao buscar Nota Fiscal -" +ex.getMessage(), ex);
+            
         }
     
     }     
-     public void criarNotaFiscal(NotaFiscal nf){
+     public void criarNotaFiscal(NotaFiscal nf) throws FalhaNotaFiscalException{
         String sql = "INSERT INTO Nota_Fiscal(id_cliente, id_produto, quantidade, data_emissao, valor_total) VALUES (?, ?, ?, ?, ?)";
     
         try (PreparedStatement stmt = this.conn.prepareStatement(sql)) {
@@ -74,24 +75,30 @@ public class NotaFiscalDAO {
            
               
          }catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Não foi possível criar uma nota Fiscal: " + ex.getMessage());
+             throw new FalhaNotaFiscalException("Erro de SQL ao criar Nota Fiscal -" +ex.getMessage(), ex);
         }
 
     }
     
-    public List<NotaFiscal> listarNotasFiscais(){
-        String sql = "SELECT * FROM Nota_Fiscal";
+    public List<NotaFiscal> listarNotasFiscais() throws FalhaNotaFiscalException{
+        String sql = "SELECT nf.id_nota_fiscal, nf.data_emissao, nf.quantidade, nf.valor_total, c.id_cliente, c.nome_cliente, p.id_produto, p.nome_produto FROM nota_fiscal nf "
+                + "JOIN cliente c ON nf.id_cliente = c.id_cliente "
+                + "JOIN produto p ON nf.id_produto = p.id_produto";
         List<NotaFiscal> listaNfs = new ArrayList<NotaFiscal>();
         
         try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
              ResultSet rs = stmt.executeQuery();
              
              while(rs.next()){
-                 NotaFiscal nf = new NotaFiscal();
                  Cliente cliente = new Cliente();
+                 cliente.setIdCliente(rs.getInt("id_cliente"));
+                 cliente.setNomeCliente(rs.getString("nome_cliente"));
+                 
                  Produto produto = new Produto();
                  produto.setIdProduto(rs.getInt("id_produto"));
-                 cliente.setIdCliente(rs.getInt("id_cliente"));
+                 produto.setNomeProduto(rs.getString("nome_produto"));
+                 
+                 NotaFiscal nf = new NotaFiscal();
                  nf.setIdNotaFiscal(rs.getInt("id_nota_fiscal"));
                  nf.setCliente(cliente);
                  nf.setProduto(produto);
@@ -103,7 +110,7 @@ public class NotaFiscalDAO {
              }
              
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Houve um erro na hora de listar as Notas Fiscais: " + ex.getMessage());
+             throw new FalhaNotaFiscalException("Erro de SQL ao listar Notas Fiscais -" +ex.getMessage(), ex);
         }
         
         return listaNfs;

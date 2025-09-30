@@ -5,6 +5,9 @@
  */
 package sistemadevendas.view;
 
+import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -12,9 +15,16 @@ import javax.swing.table.DefaultTableModel;
 import sistemadevendas.controller.ClienteController;
 import sistemadevendas.controller.NotaFiscalController;
 import sistemadevendas.controller.ProdutoController;
+import sistemadevendas.exceptions.AtualizacaoEstoqueNegativaException;
+import sistemadevendas.exceptions.FalhaClienteException;
+import sistemadevendas.exceptions.FalhaNotaFiscalException;
+import sistemadevendas.exceptions.FalhaProdutoException;
+import sistemadevendas.exceptions.NaoEncontradoException;
 import sistemadevendas.model.Cliente;
 import sistemadevendas.model.NotaFiscal;
 import sistemadevendas.model.Produto;
+import sistemadevendas.services.ClienteService;
+import sistemadevendas.services.ProdutoService;
 
 /**
  *
@@ -43,8 +53,10 @@ public class NotaFiscalView extends javax.swing.JFrame {
 
         txtProduto.setModel(modelo);
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao carregar produtos: " + e.getMessage());
+    } catch(FalhaProdutoException e){
+        JOptionPane.showMessageDialog(this, "Erro ao carregar os produtos: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+    }  catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro ao carregar os produtos: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
     }
 }
 
@@ -60,8 +72,11 @@ public class NotaFiscalView extends javax.swing.JFrame {
         }
 
         txtCliente.setModel(modelo);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao carregar clientes: " + e.getMessage());
+    } catch(FalhaClienteException e){
+        JOptionPane.showMessageDialog(this, "Erro ao carregar os clientes : " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+    }
+    catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro ao carregar os clientes : " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
     }
 }
 
@@ -81,7 +96,7 @@ public class NotaFiscalView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnListarNotas = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        dataEmissao = new javax.swing.JTextField();
+        txtDataEmissao = new javax.swing.JTextField();
         btnLimparCampos = new javax.swing.JButton();
         btnIrTelaPrincipal = new javax.swing.JButton();
         txtCliente = new javax.swing.JComboBox<>();
@@ -141,34 +156,35 @@ public class NotaFiscalView extends javax.swing.JFrame {
         painelClientes.setLayout(painelClientesLayout);
         painelClientesLayout.setHorizontalGroup(
             painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelClientesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnIrTelaPrincipal)
-                .addGap(53, 53, 53))
             .addGroup(painelClientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnLimparCampos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnListarNotas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAdicionarNF, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelClientesLayout.createSequentialGroup()
+                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtDataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnIrTelaPrincipal)
+                        .addGap(53, 53, 53))
+                    .addGroup(painelClientesLayout.createSequentialGroup()
+                        .addComponent(btnLimparCampos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnListarNotas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAdicionarNF, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         painelClientesLayout.setVerticalGroup(
             painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +205,7 @@ public class NotaFiscalView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(dataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtDataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnListarNotas)
@@ -250,12 +266,16 @@ public class NotaFiscalView extends javax.swing.JFrame {
         }
 
         double valorTotal = produtoSelecionado.getPrecoVenda() * quantidade;
-
+        String dataStr = txtDataEmissao.getText(); 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date utilDate = sdf.parse(dataStr);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        
         NotaFiscal nf = new NotaFiscal();
         nf.setCliente(clienteSelecionado);
         nf.setProduto(produtoSelecionado);
         nf.setQuantidade(quantidade);
-        nf.setDataEmissao(new java.sql.Date(System.currentTimeMillis()));
+        nf.setDataEmissao(sqlDate);
         nf.setValorTotal(valorTotal);
 
        
@@ -269,6 +289,14 @@ public class NotaFiscalView extends javax.swing.JFrame {
 
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Quantidade inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+    } catch (AtualizacaoEstoqueNegativaException e){
+         JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    } catch (FalhaNotaFiscalException e){
+        JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+    } catch (FalhaProdutoException e ) {
+        JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+    } catch (NaoEncontradoException e){
+        JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
     }
@@ -285,17 +313,22 @@ public class NotaFiscalView extends javax.swing.JFrame {
             modelo.setRowCount(0);
 
             for (NotaFiscal nf : notasFiscais) {
+                ProdutoService produtoService = new ProdutoService();
+                ClienteService clienteService = new ClienteService();
+                DecimalFormat df = new DecimalFormat("R$ #,##0.00");
                 modelo.addRow(new Object[]{
                   
                      nf.getIdNotaFiscal(),
-                     nf.getCliente().getIdCliente(),
-                     nf.getProduto().getIdProduto(),
+                     nf.getCliente().getNomeCliente(),
+                     nf.getProduto().getNomeProduto(),
                      nf.getDataEmissao(),
                      nf.getQuantidade(),
-                     nf.getValorTotal()
+                     df.format(nf.getValorTotal())
                 });
             }
 
+        } catch(FalhaNotaFiscalException e){
+            JOptionPane.showMessageDialog(this, "Erro ao listar notas fiscais: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao listar notas fiscais: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -360,7 +393,6 @@ public class NotaFiscalView extends javax.swing.JFrame {
     private javax.swing.JButton btnIrTelaPrincipal;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnListarNotas;
-    private javax.swing.JTextField dataEmissao;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -369,6 +401,7 @@ public class NotaFiscalView extends javax.swing.JFrame {
     private javax.swing.JPanel painelClientes;
     private javax.swing.JTextField qtdProduto;
     private javax.swing.JComboBox<Cliente> txtCliente;
+    private javax.swing.JTextField txtDataEmissao;
     private javax.swing.JComboBox<Produto> txtProduto;
     // End of variables declaration//GEN-END:variables
 

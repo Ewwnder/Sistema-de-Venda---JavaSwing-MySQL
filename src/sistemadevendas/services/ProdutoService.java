@@ -73,11 +73,11 @@ public class ProdutoService {
     
     public void atualizarEstoque(Produto produto, int quantidade) throws FalhaProdutoException, NaoEncontradoException, AtualizacaoEstoqueNegativaException{
             
-        if(quantidade<0){
-            throw new AtualizacaoEstoqueNegativaException(produto.getIdProduto(), quantidade);
+        if(produto.getQuantidade() - quantidade<0){
+            throw new AtualizacaoEstoqueNegativaException(produto.getIdProduto());
         }
           
-        boolean success = produtoDAO.atualizarEstoque(produto, quantidade);
+        boolean success = produtoDAO.atualizarEstoque(produto, produto.getQuantidade() - quantidade);
         
         if(!success){
             throw new NaoEncontradoException("Produto", produto.getIdProduto());

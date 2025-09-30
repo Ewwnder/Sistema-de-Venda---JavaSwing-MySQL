@@ -415,6 +415,16 @@ public class Clientes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de editar!");
                 return;
             }
+            
+            if(!validarDadosEmail(email)){
+                JOptionPane.showMessageDialog(null, "Email em formato inválido, siga o padrão: email@example.com");
+                return;
+            }
+            if(!validarDadosTelefone(telefone)){
+                JOptionPane.showMessageDialog(null, "Telefone em formato inválido, siga os padrõs possíveis:"
+                        + "Telefones celulares: (99) 99999-9999\n Telefones Fixos: (99) 2999-9999");
+                return;
+            }
 
             Cliente novoCliente = new Cliente();
             novoCliente.setIdCliente(id);

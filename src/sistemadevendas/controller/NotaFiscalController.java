@@ -4,6 +4,11 @@ package sistemadevendas.controller;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import sistemadevendas.exceptions.AtualizacaoEstoqueNegativaException;
+import sistemadevendas.exceptions.FalhaNotaFiscalException;
+import sistemadevendas.exceptions.FalhaProdutoException;
+import sistemadevendas.exceptions.IdNegativoException;
+import sistemadevendas.exceptions.NaoEncontradoException;
 import sistemadevendas.model.NotaFiscal;
 import sistemadevendas.services.NotaFiscalService;
 
@@ -16,42 +21,26 @@ import sistemadevendas.services.NotaFiscalService;
 public class NotaFiscalController {
     private NotaFiscalService notaFiscalService = new NotaFiscalService();
     
-    public NotaFiscal buscarNotaFiscalPorId(int id){
-        
-        try{
-            NotaFiscal nf = notaFiscalService.buscarNotaFiscalPorId(id);
-            return nf;
+    public NotaFiscal buscarNotaFiscalPorId(int id) throws IdNegativoException, FalhaNotaFiscalException, NaoEncontradoException{
             
-        } catch(RuntimeException e){
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-        
-        catch(Exception e){
-            return null;
-        }  
+            if(id<=0){
+                throw new IdNegativoException("Id não pode ser negativo ou 0.");
+            }
+            return notaFiscalService.buscarNotaFiscalPorId(id);
     }
     
-    public void criarNotaFiscal(NotaFiscal nf){
-        try{
-            notaFiscalService.criarNotaFiscal(nf);
-            JOptionPane.showMessageDialog(null, "Nota Fiscal cadastrada com sucesso no banco de dados");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao criar nota Fiscal: " + e.getMessage());
+    public void criarNotaFiscal(NotaFiscal nf) throws FalhaNotaFiscalException, FalhaProdutoException, NaoEncontradoException, AtualizacaoEstoqueNegativaException{
+        if(nf == null){
+            throw new NullPointerException("A nota fiscal enviada é nula.");
         }
+        
+        notaFiscalService.criarNotaFiscal(nf);
+        
+       
     }
     
     
-    public List<NotaFiscal> listarNotasFiscais(){
-        try{
-            List<NotaFiscal> lista_nf = new ArrayList<NotaFiscal>();
-            lista_nf = notaFiscalService.listarNotasFiscais();
-            
-            
-            return lista_nf;
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao listar notas fiscais");
-            return null;
-        }        
+    public List<NotaFiscal> listarNotasFiscais() throws FalhaNotaFiscalException{  
+        return notaFiscalService.listarNotasFiscais();
     }
 }

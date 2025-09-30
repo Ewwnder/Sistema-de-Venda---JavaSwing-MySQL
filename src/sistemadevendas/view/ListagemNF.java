@@ -31,7 +31,7 @@ public class ListagemNF extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaNotas = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Listagem de Notas");
@@ -44,7 +44,7 @@ public class ListagemNF extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID_NF", "ID_Cliente", "ID_Produto", "Data", "Quantidade", "Valor Total"
+                "ID_NF", "Nome Cliente", "Nome do Produto", "Data", "Quantidade", "Valor Total"
             }
         ));
         jScrollPane2.setViewportView(tabelaNotas);

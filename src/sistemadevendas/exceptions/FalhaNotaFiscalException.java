@@ -9,10 +9,10 @@ package sistemadevendas.exceptions;
  *
  * @author LucasMorais
  */
-public class AtualizacaoEstoqueNegativaException extends Exception{
+public class FalhaNotaFiscalException extends Exception {
 
-    public AtualizacaoEstoqueNegativaException(int id) {
-        super("Tentativa de atualização de estoque de produto id: " + id + " que resultou em quantidade negativa");
+    public FalhaNotaFiscalException(String message, Throwable ex) {
+        super(message, ex);
     }
     
 }

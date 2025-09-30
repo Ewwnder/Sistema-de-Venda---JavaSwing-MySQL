@@ -8,6 +8,10 @@ package sistemadevendas.services;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sistemadevendas.dao.NotaFiscalDAO;
+import sistemadevendas.exceptions.AtualizacaoEstoqueNegativaException;
+import sistemadevendas.exceptions.FalhaNotaFiscalException;
+import sistemadevendas.exceptions.FalhaProdutoException;
+import sistemadevendas.exceptions.NaoEncontradoException;
 import sistemadevendas.model.NotaFiscal;
 
 /**
@@ -17,34 +21,29 @@ import sistemadevendas.model.NotaFiscal;
 public class NotaFiscalService {
 
     private NotaFiscalDAO nfDAO = new NotaFiscalDAO();
+    private ProdutoService produtoService = new ProdutoService();
     
-    public NotaFiscal buscarNotaFiscalPorId(int id) {
-        try{
-            return nfDAO.buscarNotaFiscalPorId(id);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao buscar nota: " +e.getMessage());
-            return null;
+    public NotaFiscal buscarNotaFiscalPorId(int id) throws FalhaNotaFiscalException, NaoEncontradoException {
+        
+        NotaFiscal nf = nfDAO.buscarNotaFiscalPorId(id);
+       
+        if(nf == null){
+            throw new NaoEncontradoException("Nota Fiscal", id);
         }
+        return nf;
         
     }
     
-    public void criarNotaFiscal(NotaFiscal nf) {
-        try{
-             nfDAO.criarNotaFiscal(nf);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao criar nota fiscal " + e.getMessage());
-        }
+    public void criarNotaFiscal(NotaFiscal nf) throws FalhaNotaFiscalException, FalhaProdutoException, NaoEncontradoException, AtualizacaoEstoqueNegativaException {
+        produtoService.atualizarEstoque(nf.getProduto(), nf.getQuantidade());
+        nfDAO.criarNotaFiscal(nf);
+        
        
+   
     }
 
-    public List<NotaFiscal> listarNotasFiscais() {
-        try{
-            return nfDAO.listarNotasFiscais();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao listar notas fiscais: " + e.getMessage());
-            return null;
-        }
-        
+    public List<NotaFiscal> listarNotasFiscais() throws FalhaNotaFiscalException {
+        return nfDAO.listarNotasFiscais();
     }
     
 }

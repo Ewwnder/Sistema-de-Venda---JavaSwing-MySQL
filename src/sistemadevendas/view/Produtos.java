@@ -6,6 +6,7 @@
 package sistemadevendas.view;
 
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -168,18 +169,19 @@ public class Produtos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscarProdutoPorId)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnIrTelaPrincipal))))
+                                .addComponent(btnIrTelaPrincipal)))
+                        .addGap(53, 53, 53))
                     .addGroup(painelClientesLayout.createSequentialGroup()
                         .addComponent(btnLimparCampos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnListarProdutos)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRemoverProdutos)))
-                .addGap(53, 53, 53))
+                        .addComponent(btnEditarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemoverProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         painelClientesLayout.setVerticalGroup(
             painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,8 +220,8 @@ public class Produtos extends javax.swing.JFrame {
                     .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAdicionarProduto)
                         .addComponent(btnListarProdutos)
-                        .addComponent(btnEditarProdutos))
-                    .addComponent(btnRemoverProdutos))
+                        .addComponent(btnEditarProdutos)
+                        .addComponent(btnRemoverProdutos)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -272,7 +274,7 @@ public class Produtos extends javax.swing.JFrame {
             novoProduto.setPrecoVenda(preco_venda);
 
             produtoController.adicionarProduto(novoProduto);
-
+            JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso!!!");
             limparCampos(); 
         } catch(ExistenteException e){
              JOptionPane.showMessageDialog(this, "Erro ao adicionar produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -293,10 +295,7 @@ public class Produtos extends javax.swing.JFrame {
        txtDescricaoProdutoMostrar.setText("");
        txtQuantidadeProdutoMostrar.setText("");
        txtPrecoVendaProdutoMostrar.setText("");
-       
-        
-          
-        
+    
     }
     
     private void btnRemoverProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverProdutosActionPerformed
@@ -316,7 +315,8 @@ public class Produtos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Produto removido com sucesso!");
 
                 limparCampos();
-                }
+            }
+            
         } catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         } catch (FalhaProdutoException e){
@@ -373,13 +373,13 @@ public class Produtos extends javax.swing.JFrame {
 
             DefaultTableModel modelo = (DefaultTableModel) listaProdutosFrame.tabelaProdutos.getModel(); // Padrão q a internet recomenda, qualquer coisa trocar depois.
             modelo.setRowCount(0);
-
+            DecimalFormat df = new DecimalFormat("R$ #,##0.00");
             for (Produto p : produtos) {
                 modelo.addRow(new Object[]{
                     p.getIdProduto(),
                     p.getNomeProduto(),
                     p.getDescricao(),
-                    p.getPrecoVenda(),
+                    df.format(p.getPrecoVenda()),
                     p.getQuantidade()
                 });
             }

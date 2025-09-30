@@ -29,8 +29,8 @@ public class ProdutoDAO {
         String sql = "UPDATE Produto SET quantidade = ? WHERE id_produto = ?";
         
         try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
-            stmt.setInt(1, produto.getIdProduto());
-            stmt.setInt(2, estoque);
+            stmt.setInt(1, estoque);
+            stmt.setInt(2, produto.getIdProduto());
             
             int atualizado = stmt.executeUpdate();
             return atualizado >0;

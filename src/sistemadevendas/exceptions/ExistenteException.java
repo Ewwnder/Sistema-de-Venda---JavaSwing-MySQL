@@ -15,8 +15,8 @@ public class ExistenteException extends Exception {
         super(tabela + " com id: " + id + " ja existe na base de dados");
     }
     
-    public ExistenteException(String tabela, String email){
-        super(tabela + " com email: " + email + " ja existe na base de dados");
+    public ExistenteException(String tabela, String campo, String valor){
+        super(tabela + " com " + campo + ": " + valor + " ja existe na base de dados");
     }
     
 }

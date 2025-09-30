@@ -33,10 +33,14 @@ public class ClienteService {
         
     }
     
+    public Cliente buscarClientePorEmail(Cliente cliente) throws FalhaClienteException{
+        return clienteDAO.buscarPorEmail(cliente.getEmail());
+    }
+    
     public void adicionarCliente(Cliente cliente) throws FalhaClienteException, ExistenteException{
         
-        if(clienteDAO.buscarPorEmail(cliente.getEmail())!=null){
-            throw new ExistenteException("Cliente", cliente.getEmail());
+        if(buscarClientePorEmail(cliente)!=null){
+            throw new ExistenteException("Cliente", "email", cliente.getEmail());
         }
         
         clienteDAO.criarCliente(cliente);
@@ -58,10 +62,10 @@ public class ClienteService {
     
     public void editarCliente(Cliente cliente) throws FalhaClienteException, NaoEncontradoException, ExistenteException{
         
-        Cliente existente = clienteDAO.buscarPorEmail(cliente.getEmail());
+        Cliente existente = buscarClientePorEmail(cliente);
         
-        if(existente != null && existente.getIdCliente() != cliente.getIdCliente()){
-             throw new ExistenteException("Cliente", cliente.getEmail());
+        if(existente!=null && existente.getIdCliente() != cliente.getIdCliente()){
+             throw new ExistenteException("Cliente", "email", cliente.getEmail());
         }
         
         boolean success = clienteDAO.editarCliente(cliente);

@@ -10,6 +10,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemadevendas.controller.ProdutoController;
+import sistemadevendas.exceptions.ExistenteException;
+import sistemadevendas.exceptions.FalhaProdutoException;
+import sistemadevendas.exceptions.IdNegativoException;
+import sistemadevendas.exceptions.NaoEncontradoException;
 import sistemadevendas.model.Produto;
 
 /**
@@ -270,8 +274,12 @@ public class Produtos extends javax.swing.JFrame {
             produtoController.adicionarProduto(novoProduto);
 
             limparCampos(); 
-        }catch(Exception e){
-           JOptionPane.showMessageDialog(null, "Houve um erro ao adicionar: " + e.getMessage());
+        } catch(ExistenteException e){
+             JOptionPane.showMessageDialog(this, "Erro ao adicionar produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(FalhaProdutoException e){
+             JOptionPane.showMessageDialog(this, "Erro ao adicionar produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(Exception e){
+           JOptionPane.showMessageDialog(this, "Erro ao adicionar produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 
         }
         
@@ -292,11 +300,14 @@ public class Produtos extends javax.swing.JFrame {
     }
     
     private void btnRemoverProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverProdutosActionPerformed
+       
+        String idString = txtIdProdutoBusca.getText().trim();
+        int id = -1;
+
+            
+      
         try{
-            String idString = txtIdProdutoBusca.getText().trim();
-
-            int id = Integer.parseInt(idString);
-
+            id = Integer.parseInt(idString);
             int confirm = JOptionPane.showConfirmDialog(this, "Deseja remover mesmo o produto?", "SIM", JOptionPane.YES_NO_OPTION);
 
             if (confirm==JOptionPane.YES_OPTION){
@@ -305,11 +316,17 @@ public class Produtos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Produto removido com sucesso!");
 
                 limparCampos();
-            }
-        } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Digite um número válido para o ID");
+                }
+        } catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (FalhaProdutoException e){
+             JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (NaoEncontradoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (IdNegativoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao remover o produto: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRemoverProdutosActionPerformed
 
@@ -320,14 +337,9 @@ public class Produtos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NULO OU VAZIO!");
             return;
         }
-        int id = Integer.parseInt(txtIdProdutoBusca.getText());
-
-        if(id<0){
-            JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NEGATIVO");
-            return;
-        }
-
+       
         try {
+            int id = Integer.parseInt(txtIdProdutoBusca.getText());
             Produto p = produtoController.buscarProdutoPorId(id);
             txtIdProdutoMostrar.setText(String.valueOf(p.getIdProduto()));
             txtNomeProdutoMostrar.setText(p.getNomeProduto());
@@ -335,8 +347,16 @@ public class Produtos extends javax.swing.JFrame {
             txtQuantidadeProdutoMostrar.setText(String.valueOf(p.getQuantidade()));
             txtPrecoVendaProdutoMostrar.setText(String.valueOf(p.getPrecoVenda()));
 
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (FalhaProdutoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (IdNegativoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (NaoEncontradoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e){
-            System.out.println("Houve algum erro: " + e.getMessage());
+           JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnBuscarProdutoPorIdActionPerformed
 
@@ -364,6 +384,8 @@ public class Produtos extends javax.swing.JFrame {
                 });
             }
 
+        } catch(FalhaProdutoException e ){
+            JOptionPane.showMessageDialog(this, "Erro ao listar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao listar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -405,9 +427,17 @@ public class Produtos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Produto atualizado com sucesso!!!");
             limparCampos();
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "ID inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch(ExistenteException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch(FalhaProdutoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch(IdNegativoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (NaoEncontradoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao editar o cliente: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao editar o produto: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarProdutosActionPerformed
 

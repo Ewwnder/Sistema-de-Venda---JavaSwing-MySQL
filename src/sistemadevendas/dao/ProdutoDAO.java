@@ -6,8 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
-import sistemadevendas.exceptions.ProdutoExisteException;
+import sistemadevendas.exceptions.FalhaProdutoException;
 import sistemadevendas.model.Produto;
 import sistemadevendas.util.Conexao;
 
@@ -25,7 +24,23 @@ public class ProdutoDAO {
         this.conn = this.conexao.getConexao();
     }
     
-    public void adicionarProduto(Produto produto) {
+    
+    public boolean atualizarEstoque(Produto produto, int estoque) throws FalhaProdutoException{
+        String sql = "UPDATE Produto SET quantidade = ? WHERE id_produto = ?";
+        
+        try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
+            stmt.setInt(1, produto.getIdProduto());
+            stmt.setInt(2, estoque);
+            
+            int atualizado = stmt.executeUpdate();
+            return atualizado >0;
+            
+        } catch (SQLException ex){
+            throw new FalhaProdutoException("Erro de SQL ao atualizar estoque de produto - " + ex.getMessage(), ex);
+        }
+    }
+    
+    public void adicionarProduto(Produto produto) throws FalhaProdutoException {
         
         String sql = "INSERT INTO Produto (nome_produto, descricao, preco_venda, quantidade) VALUES (?, ?, ?, ?)";
         
@@ -37,12 +52,13 @@ public class ProdutoDAO {
             
             stmt.executeUpdate();
             
-        } catch(SQLException e){
-            System.out.println("Erro ao inserir produto: " + e.getMessage());
+        } catch(SQLException ex){
+            throw new FalhaProdutoException("Erro de SQL ao cadastrar produto - " + ex.getMessage(), ex);
+            
         }
     }
     
-    public String buscarPorNome(String nome){
+    public Produto buscarPorNome(String nome) throws FalhaProdutoException{
         String sql = "SELECT * FROM Produto WHERE nome_produto = ?";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -52,17 +68,24 @@ public class ProdutoDAO {
             if(!rs.first()){
                 return null;
             }
-            return rs.getString("nome_produto");
+            
+            Produto p = new Produto();
+            p.setIdProduto(rs.getInt("id_produto"));
+            p.setNomeProduto(nome);
+            p.setDescricao(rs.getString("descricao"));
+            p.setPrecoVenda(rs.getDouble("preco_venda"));
+            p.setQuantidade(rs.getInt("quantidade"));
+            return p;
            
         }catch(SQLException ex){
-            System.out.println("Erro ao buscar produto por nome: " + ex.getMessage());
-            return null;
+            throw new FalhaProdutoException("Erro de SQL ao buscar produto por nome - " + ex.getMessage(), ex);
+            
         }
         
     }
     
      
-    public Produto buscarPorId(int id){
+    public Produto buscarPorId(int id) throws FalhaProdutoException{
         String sql = "SELECT * FROM Produto WHERE id_produto = ?";
         
         try{
@@ -85,12 +108,11 @@ public class ProdutoDAO {
            return p;
             
         } catch(SQLException ex){
-            System.out.println("Erro ao buscar produto por id: " + ex.getMessage());
-            return null;
+            throw new FalhaProdutoException("Erro de SQL ao buscar produto por id - " + ex.getMessage(), ex);
         }
     }
     
-    public boolean removerProduto(int id){
+    public boolean removerProduto(int id) throws FalhaProdutoException{
         String sql = "DELETE FROM Produto WHERE id_produto = ?";
         
         try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
@@ -98,15 +120,14 @@ public class ProdutoDAO {
             int removido = stmt.executeUpdate();
             return removido>0;
  
-        } catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "Erro ao remover o produto: " + e.getMessage());
-            return false;
+        } catch (SQLException ex){
+            throw new FalhaProdutoException("Erro de SQL ao deletar produto - " + ex.getMessage(), ex);
         }
       
     }
     
     
-    public boolean editarProduto(Produto produto){
+    public boolean editarProduto(Produto produto) throws FalhaProdutoException{
         String sql = "UPDATE Produto SET nome_produto = ?, descricao = ?, preco_venda = ?, quantidade = ? WHERE id_produto = ?";
         
         try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
@@ -119,14 +140,13 @@ public class ProdutoDAO {
             
             int att = stmt.executeUpdate();
             return att>0;
-        } catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "Erro ao editar produto: " + e.getMessage());
-            return false;
+        } catch(SQLException ex){
+            throw new FalhaProdutoException("Erro de SQL ao editar produto - " + ex.getMessage(), ex);
         }
 
     }
     
-      public List<Produto> listarProdutos(){
+      public List<Produto> listarProdutos() throws FalhaProdutoException{
         List<Produto> produtos = new ArrayList<Produto>();
         String sql = "SELECT * FROM Produto";
         
@@ -143,8 +163,8 @@ public class ProdutoDAO {
                 produtos.add(produto);
             }
             
-        } catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "Erro ao listar produtos: " + e.getMessage());
+        } catch (SQLException ex){
+            throw new FalhaProdutoException("Erro ao listar produtos - " + ex.getMessage(), ex);
         }
         
         return produtos;

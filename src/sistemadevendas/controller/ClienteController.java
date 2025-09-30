@@ -8,9 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import sistemadevendas.exceptions.ClienteExistenteException;
+import sistemadevendas.exceptions.ClienteNaoEncontradoException;
+import sistemadevendas.exceptions.FalhaAoBuscarClienteException;
+import sistemadevendas.exceptions.FalhaAoCadastrarClienteException;
+import sistemadevendas.exceptions.FalhaAoEditarClienteException;
+import sistemadevendas.exceptions.FalhaAoListarClientesException;
+import sistemadevendas.exceptions.FalhaAoRemoverClienteException;
 import sistemadevendas.model.Cliente;
 import sistemadevendas.services.ClienteService;
-import sistemadevendas.exceptions.IdClienteInvalidoException;
+import sistemadevendas.exceptions.IdNegativoException;
 
 /**
  *
@@ -20,41 +27,46 @@ public class ClienteController {
     
     private ClienteService clienteService = new ClienteService();
     
-    public Cliente buscarClientePorId(int id){
+    public Cliente buscarClientePorId(int id) throws IdNegativoException, ClienteNaoEncontradoException, FalhaAoBuscarClienteException{
         
-        
-        try{
-            Cliente c = clienteService.buscarClientePorId(id);
-            return c;
-            
-        } catch(RuntimeException e){
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
+        if(id<=0){
+            throw new IdNegativoException("O Id não pode ser negativo.");
         }
         
-        catch(Exception e){
-            return null;
-        }  
+        Cliente c = clienteService.buscarClientePorId(id);
+        return c;
+       
     }
     
-    public void adicionarCliente(Cliente cliente){
-        try{
-            clienteService.adicionarCliente(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso no banco de dados");
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente: " + e.getMessage());
+    public void adicionarCliente(Cliente cliente) throws ClienteExistenteException, FalhaAoCadastrarClienteException, FalhaAoBuscarClienteException{
+        
+        if(cliente == null){
+            throw new NullPointerException("O cliente que está sendo adicionado é nulo");
         }
+        
+        clienteService.adicionarCliente(cliente);
+        
     }
        
-    public void removerCliente(int id){
-         clienteService.removerCliente(id);
+    public void removerCliente(int id) throws IdNegativoException, ClienteNaoEncontradoException, FalhaAoBuscarClienteException, FalhaAoRemoverClienteException{
+        
+        if(id<=0){
+            throw new IdNegativoException("O Id não pode ser negativo.");
+        }
+        clienteService.removerCliente(id);
+         
     }
     
-    public void editarCliente(Cliente cliente){
+    public void editarCliente(Cliente cliente) throws FalhaAoEditarClienteException, ClienteNaoEncontradoException, IdNegativoException, FalhaAoBuscarClienteException, ClienteExistenteException{
+       
+        if(cliente.getIdCliente()<=0){
+            throw new IdNegativoException("O Id não pode ser negativo.");
+        }
+        
         clienteService.editarCliente(cliente);
     }
     
-    public List<Cliente> listarClientes(){
+    public List<Cliente> listarClientes() throws FalhaAoListarClientesException{
         return clienteService.listarClientes();
     }
     

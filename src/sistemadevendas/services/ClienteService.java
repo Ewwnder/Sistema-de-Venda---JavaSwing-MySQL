@@ -7,6 +7,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import sistemadevendas.dao.ClienteDAO;
+import sistemadevendas.exceptions.ClienteExistenteException;
+import sistemadevendas.exceptions.ClienteNaoEncontradoException;
+import sistemadevendas.exceptions.FalhaAoBuscarClienteException;
+import sistemadevendas.exceptions.FalhaAoCadastrarClienteException;
+import sistemadevendas.exceptions.FalhaAoEditarClienteException;
+import sistemadevendas.exceptions.FalhaAoListarClientesException;
+import sistemadevendas.exceptions.FalhaAoRemoverClienteException;
+import sistemadevendas.exceptions.IdNegativoException;
 import sistemadevendas.model.Cliente;
 
 /**
@@ -19,59 +27,56 @@ public class ClienteService {
        
     
     
-    public Cliente buscarClientePorId(int id)
+    public Cliente buscarClientePorId(int id) throws ClienteNaoEncontradoException, FalhaAoBuscarClienteException
     {
         Cliente cliente = clienteDAO.buscarPorId(id);
+        
         if(cliente==null){
-            throw new RuntimeException("Cliente não encontrado");
+            throw new ClienteNaoEncontradoException("Cliente de id: " + id + " não foi encontrado no BD");
         }
         return cliente;
         
     }
     
-    public void adicionarCliente(Cliente cliente){
+    public void adicionarCliente(Cliente cliente) throws ClienteExistenteException, FalhaAoBuscarClienteException, FalhaAoCadastrarClienteException, FalhaAoCadastrarClienteException{
+        
+        if(clienteDAO.buscarPorEmail(cliente.getEmail())!=null){
+            throw new ClienteExistenteException("Email do Cliente já existe na base de dados.");
+        }
+        
         clienteDAO.criarCliente(cliente);
+        
+       
     }
 
 
-    public void removerCliente(int id){
+    public void removerCliente(int id) throws ClienteNaoEncontradoException, FalhaAoBuscarClienteException, FalhaAoRemoverClienteException{
        
-        if (id<0){
-            throw new IllegalArgumentException("ID não pode ser negativo");
-        }
-        
-        Cliente c = clienteDAO.buscarPorId(id);
-        
-        if (c==null){
-            throw new RuntimeException("Cliente com ID " + id + " não existe");
-        }
         
         boolean success = clienteDAO.removerCliente(id);
         
-        if (!success){
-            throw new RuntimeException("Falha ao remover cliente do banco");
+        if(!success){
+            throw new ClienteNaoEncontradoException("Cliente com ID " + id + " não existe");
         }
+        
     }
     
-    public void editarCliente(Cliente cliente){
-        if (cliente.getIdCliente()<=0){
-            throw new IllegalArgumentException("ID não pode ser negativo ou zero!");
-        }
+    public void editarCliente(Cliente cliente) throws FalhaAoEditarClienteException, ClienteNaoEncontradoException, FalhaAoBuscarClienteException, ClienteExistenteException{
         
-        Cliente ex = clienteDAO.buscarPorId(cliente.getIdCliente());
+        Cliente existente = clienteDAO.buscarPorEmail(cliente.getEmail());
         
-        if (ex==null){
-            throw new RuntimeException("Cliente com ID " + cliente.getIdCliente() + " não existe!");
+        if(existente != null && existente.getIdCliente() != cliente.getIdCliente()){
+             throw new ClienteExistenteException("Email do Cliente já existe na base de dados.");
         }
         
         boolean success = clienteDAO.editarCliente(cliente);
         
         if (!success){
-            throw new RuntimeException("Falha ao editar o cliente no banco.");
+            throw new ClienteNaoEncontradoException("Cliente com ID " + cliente.getIdCliente() + " não existe");
         }
     }
     
-    public List<Cliente> listarClientes(){
+    public List<Cliente> listarClientes() throws FalhaAoListarClientesException{
         return clienteDAO.listarClientes();
     }
 

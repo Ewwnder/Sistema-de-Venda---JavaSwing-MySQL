@@ -6,9 +6,19 @@
 package sistemadevendas.view;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemadevendas.controller.ClienteController;
+import sistemadevendas.exceptions.ClienteExistenteException;
+import sistemadevendas.exceptions.ClienteNaoEncontradoException;
+import sistemadevendas.exceptions.FalhaAoBuscarClienteException;
+import sistemadevendas.exceptions.FalhaAoCadastrarClienteException;
+import sistemadevendas.exceptions.FalhaAoEditarClienteException;
+import sistemadevendas.exceptions.FalhaAoListarClientesException;
+import sistemadevendas.exceptions.FalhaAoRemoverClienteException;
+import sistemadevendas.exceptions.IdNegativoException;
 import sistemadevendas.model.Cliente;
 
 /**
@@ -234,7 +244,18 @@ public class Clientes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private static final Pattern TELEFONE_PATTERN = Pattern.compile("^\\([1-9]{2}\\) (?:[2-8]|9[0-9])[0-9]{3}-[0-9]{4}$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    
+    private boolean validarDadosTelefone(String telefone){
+        return TELEFONE_PATTERN.matcher(telefone).matches();
+     }
+    
+ 
+    private boolean validarDadosEmail(String email){
+       return EMAIL_PATTERN.matcher(email).matches(); 
+    }
+    
     private void btnAdicionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarClienteActionPerformed
 
         ClienteController clienteController = new ClienteController();
@@ -247,15 +268,37 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de adicionar!");
             return;
         }
-
+        if(!validarDadosEmail(email)){
+            JOptionPane.showMessageDialog(null, "Email em formato inválido, siga o padrão: email@example.com");
+            return;
+        }
+        if(!validarDadosTelefone(telefone)){
+            JOptionPane.showMessageDialog(null, "Telefone em formato inválido, siga os padrõs possíveis:"
+                    + "Telefones celulares: (99) 99999-9999\n Telefones Fixos: (99) 2999-9999");
+            return;
+        }
+        
         Cliente novoCliente = new Cliente();
 
         novoCliente.setNomeCliente(nome);
         novoCliente.setEmail(email);
         novoCliente.setTelefone(telefone);
-
-        clienteController.adicionarCliente(novoCliente);
-
+        
+        try{
+            clienteController.adicionarCliente(novoCliente);
+            JOptionPane.showMessageDialog(null, "Sucesso ao cadastrar cliente");
+        } catch(ClienteExistenteException e){
+           JOptionPane.showMessageDialog(this, "Erro ao adicionar cliente: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(FalhaAoCadastrarClienteException e){
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(FalhaAoBuscarClienteException e){
+            JOptionPane.showMessageDialog(null, "O sistema não conseguiu verificar se o email já está cadastradao: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Houve um erro: " + e.getMessage());
+        }
+        
+        
+       
         limparFormularioCliente();
     }//GEN-LAST:event_btnAdicionarClienteActionPerformed
 
@@ -274,27 +317,34 @@ public class Clientes extends javax.swing.JFrame {
 
                 limparFormularioCliente();
             }
-        } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Digite um número válido para o ID");
+        } catch (FalhaAoRemoverClienteException e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover cliente: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (ClienteNaoEncontradoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover cliente: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Digite um número válido para o ID", "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao remover o cliente: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao remover o cliente: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRemoverClientesActionPerformed
+    
 
     private void btnBuscarClientePorIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClientePorIdActionPerformed
         ClienteController clienteController = new ClienteController();
-
+        
         if(txtIdClienteBusca.getText().isEmpty() || txtIdClienteBusca.getText().equals("")){
             JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NULO OU VAZIO!");
             return;
         }
-        int id = Integer.parseInt(txtIdClienteBusca.getText());
-
-        if(id<0){
-            JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NEGATIVO");
-            return;
+        int id=0;
+        try{
+            id = Integer.parseInt(txtIdClienteBusca.getText());
+        }catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(null, "Id digitado não é um numero: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
-
+        
+        
         try {
             Cliente c = clienteController.buscarClientePorId(id);
             txtIdClienteMostrar.setText(String.valueOf(c.getIdCliente()));
@@ -302,8 +352,15 @@ public class Clientes extends javax.swing.JFrame {
             txtEmailClienteMostrar.setText(c.getEmail());
             txtTelefoneClienteMostrar.setText(c.getTelefone());
 
-        } catch (Exception e){
-            System.out.println("Houve algum erro: " + e.getMessage());
+        } catch(IdNegativoException e){
+             JOptionPane.showMessageDialog(null, "Houve um erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (ClienteNaoEncontradoException e){
+             JOptionPane.showMessageDialog(null, "Houve um erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(FalhaAoBuscarClienteException e){
+            JOptionPane.showMessageDialog(null, "Houve um erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } 
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Houve um erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnBuscarClientePorIdActionPerformed
@@ -321,7 +378,8 @@ public class Clientes extends javax.swing.JFrame {
 
             DefaultTableModel modelo = (DefaultTableModel) listaClientesFrame.tabelaClientes.getModel(); // Padrão q a internet recomenda, qualquer coisa trocar depois.
             modelo.setRowCount(0);
-
+            
+            //pode usar o forEach tbm
             for (Cliente c : clientes) {
                 modelo.addRow(new Object[]{
                     c.getIdCliente(),
@@ -331,8 +389,10 @@ public class Clientes extends javax.swing.JFrame {
                 });
             }
 
-        } catch (Exception e) {
+        } catch (FalhaAoListarClientesException e) {
             JOptionPane.showMessageDialog(this, "Erro ao listar clientes: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao listar clientes " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnListarClienteActionPerformed
 
@@ -377,9 +437,14 @@ public class Clientes extends javax.swing.JFrame {
             limparFormularioCliente();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "ID inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (ClienteExistenteException e){
+           JOptionPane.showMessageDialog(this, "Erro ao editar cliente: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (FalhaAoEditarClienteException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar cliente: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Erro ao remover o cliente: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao editar o cliente: " + e.getMessage());
         }
+        
     }//GEN-LAST:event_btnEditarClientesActionPerformed
 
     private void btnIrTelaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrTelaPrincipalActionPerformed

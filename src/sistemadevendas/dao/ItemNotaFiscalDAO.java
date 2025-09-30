@@ -39,6 +39,7 @@ public class ItemNotaFiscalDAO {
             
             if(criarNF>0){
                 atualizarValorTotal(notaFiscal);
+                
             }
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Não foi possível criar um item na Nota Fiscal: " + ex.getMessage());

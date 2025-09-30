@@ -6,15 +6,15 @@
 package sistemadevendas.view;
 
 import java.util.List;
-import java.util.regex.Matcher;
+
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemadevendas.controller.ClienteController;
-import sistemadevendas.exceptions.ClienteExistenteException;
-import sistemadevendas.exceptions.ClienteNaoEncontradoException;
+import sistemadevendas.exceptions.ExistenteException;
 import sistemadevendas.exceptions.FalhaClienteException;
 import sistemadevendas.exceptions.IdNegativoException;
+import sistemadevendas.exceptions.NaoEncontradoException;
 import sistemadevendas.model.Cliente;
 
 /**
@@ -283,7 +283,7 @@ public class Clientes extends javax.swing.JFrame {
         try{
             clienteController.adicionarCliente(novoCliente);
             JOptionPane.showMessageDialog(null, "Sucesso ao cadastrar cliente");
-        } catch(ClienteExistenteException e){
+        } catch(ExistenteException e){
            JOptionPane.showMessageDialog(this, "Erro ao adicionar cliente: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         } catch(FalhaClienteException e){
             JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -313,7 +313,7 @@ public class Clientes extends javax.swing.JFrame {
             }
         } catch (FalhaClienteException e){
             JOptionPane.showMessageDialog(this, "Erro ao remover cliente: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (ClienteNaoEncontradoException e){
+        } catch (NaoEncontradoException e){
             JOptionPane.showMessageDialog(this, "Erro ao remover cliente: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Digite um número válido para o ID", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -347,7 +347,7 @@ public class Clientes extends javax.swing.JFrame {
 
         } catch(IdNegativoException e){
              JOptionPane.showMessageDialog(null, "Houve um erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-        } catch (ClienteNaoEncontradoException e){
+        } catch (NaoEncontradoException e){
              JOptionPane.showMessageDialog(null, "Houve um erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         } catch(FalhaClienteException e){
             JOptionPane.showMessageDialog(null, "Houve um erro: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -429,9 +429,11 @@ public class Clientes extends javax.swing.JFrame {
             limparFormularioCliente();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "ID inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (ClienteExistenteException e){
+        } catch (ExistenteException e){
            JOptionPane.showMessageDialog(this, "Erro ao editar cliente: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         } catch (FalhaClienteException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar cliente: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(NaoEncontradoException e){
             JOptionPane.showMessageDialog(this, "Erro ao editar cliente: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Erro ao editar o cliente: " + e.getMessage());

@@ -9,10 +9,13 @@ package sistemadevendas.exceptions;
  *
  * @author LucasMorais
  */
-public class ClienteNaoEncontradoException extends Exception{
+public class NaoEncontradoException extends Exception {
 
-    public ClienteNaoEncontradoException(String message) {
-        super(message);
+    public NaoEncontradoException(String tabela, int id) {
+        super(tabela + " com id: " + id + " não encontrado");
     }
+    
+    
+    
     
 }

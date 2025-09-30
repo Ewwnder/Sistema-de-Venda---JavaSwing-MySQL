@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 import sistemadevendas.exceptions.FalhaClienteException;
 import sistemadevendas.model.Cliente;

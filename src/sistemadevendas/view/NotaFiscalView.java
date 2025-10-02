@@ -25,6 +25,7 @@ import sistemadevendas.exceptions.FalhaClienteException;
 import sistemadevendas.exceptions.FalhaItemNotaFiscalException;
 import sistemadevendas.exceptions.FalhaNotaFiscalException;
 import sistemadevendas.exceptions.FalhaProdutoException;
+import sistemadevendas.exceptions.IdNegativoException;
 import sistemadevendas.exceptions.NaoEncontradoException;
 import sistemadevendas.model.Cliente;
 import sistemadevendas.model.ItemNotaFiscal;
@@ -545,6 +546,7 @@ public class NotaFiscalView extends javax.swing.JFrame {
        
            NotaFiscalController notaFiscalController = new NotaFiscalController();
            notaFiscalController.criarNotaFiscal(notaFiscal, lista_itens);
+           JOptionPane.showMessageDialog(null, "Nota Fiscal cadastrada com sucesso");
            
            
        }catch(ParseException e){
@@ -560,6 +562,7 @@ public class NotaFiscalView extends javax.swing.JFrame {
        }catch (NaoEncontradoException e) {
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar item na nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
        }
+       modelo.setRowCount(0);
         
     }//GEN-LAST:event_btnCadastrarNFActionPerformed
 
@@ -628,6 +631,7 @@ public class NotaFiscalView extends javax.swing.JFrame {
         qtdProduto.setText("");
         valorUnitarioTxt.setText("");
         totalProdutoTxt.setText("");
+        txtDataEmissao.setText("");
         
     }//GEN-LAST:event_btnAdicionarItemActionPerformed
 
@@ -653,6 +657,14 @@ public class NotaFiscalView extends javax.swing.JFrame {
             buscarNotaFiscal.setVisible(true);
             
 
+        }catch(FalhaItemNotaFiscalException e){
+            JOptionPane.showMessageDialog(this, "Erro ao listar notas fiscais: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+        }catch(IdNegativoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao listar notas fiscais: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+        }catch(NaoEncontradoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao listar notas fiscais: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Erro ao listar notas fiscais: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
         } catch(FalhaNotaFiscalException e){
             JOptionPane.showMessageDialog(this, "Erro ao listar notas fiscais: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
         } catch (Exception e) {

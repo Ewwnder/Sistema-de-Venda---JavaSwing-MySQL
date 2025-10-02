@@ -109,7 +109,7 @@ public class BuscarNotaFiscalView extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel2.setText("Gerenciamento de NF");

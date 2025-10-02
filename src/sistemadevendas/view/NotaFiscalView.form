@@ -73,7 +73,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+<<<<<<< HEAD
               <EmptySpace pref="45" max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="30" max="32767" attributes="0"/>
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="painelClientes" min="-2" pref="737" max="-2" attributes="0"/>
@@ -81,9 +85,13 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnIrTelaPrincipal2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+=======
+                      <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
                   </Group>
               </Group>
           </Group>
@@ -93,6 +101,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+<<<<<<< HEAD
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel2" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -100,6 +109,9 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
+=======
+              <Component id="jLabel2" max="32767" attributes="0"/>
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
               <EmptySpace max="-2" attributes="0"/>
               <Component id="painelClientes" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -137,6 +149,7 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -169,12 +182,49 @@
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+=======
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="btnCadastrarNF" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnRemoverItemSelecionado" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="btnAdicionarItem" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" alignment="0" min="-2" pref="678" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="idNF" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txtCliente" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="idBuscar" min="-2" pref="48" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btnConsultar" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="txtProduto" min="-2" pref="120" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jLabel3" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="btnListarNotas" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btnLimparCampos" min="-2" max="-2" attributes="0"/>
                                       </Group>
+<<<<<<< HEAD
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Group type="102" attributes="0">
@@ -188,10 +238,17 @@
                                                   <Component id="totalProdutoTxt" min="-2" pref="82" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
+=======
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="qtdProduto" min="-2" pref="56" max="-2" attributes="0"/>
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="valorUnitarioTxt" min="-2" pref="56" max="-2" attributes="0"/>
+<<<<<<< HEAD
                                       </Group>
                                   </Group>
                               </Group>
@@ -210,6 +267,23 @@
                           <EmptySpace min="82" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+=======
+                                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtDataEmissao" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="totalProdutoTxt" min="-2" pref="82" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
@@ -240,6 +314,7 @@
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+<<<<<<< HEAD
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="btnListarNotas" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -247,6 +322,15 @@
                                   <Component id="txtCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+=======
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                  <Component id="btnListarNotas" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnLimparCampos" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
                           </Group>
                           <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -254,6 +338,7 @@
                               <Component id="qtdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="valorUnitarioTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -269,6 +354,21 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnRemoverItemSelecionado" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="btnCadastrarNF" min="-2" max="-2" attributes="0"/>
+=======
+                              <Component id="totalProdutoTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="valorUnitarioTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnAdicionarItem" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" min="-2" pref="108" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnCadastrarNF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnRemoverItemSelecionado" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
                           </Group>
                       </Group>
                   </Group>
@@ -370,7 +470,10 @@
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="qtdProdutoFocusLost"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qtdProdutoMouseExited"/>
             <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="qtdProdutoInputMethodTextChanged"/>
+<<<<<<< HEAD
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="qtdProdutoActionPerformed"/>
+=======
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="qtdProdutoPropertyChange"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="qtdProdutoKeyPressed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="qtdProdutoKeyTyped"/>
@@ -508,6 +611,7 @@
         </Component>
       </SubComponents>
     </Container>
+<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="btnIrTelaPrincipal2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Voltar"/>
@@ -516,5 +620,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIrTelaPrincipal2ActionPerformed"/>
       </Events>
     </Component>
+=======
+>>>>>>> e96f00ba62b9c80ea67410e02e056ef4ed3c890a
   </SubComponents>
 </Form>

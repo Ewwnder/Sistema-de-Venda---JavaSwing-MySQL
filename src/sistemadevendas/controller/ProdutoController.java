@@ -1,12 +1,10 @@
 package sistemadevendas.controller;
 
 import java.util.List;
-import javax.swing.JOptionPane;
 import sistemadevendas.exceptions.ExistenteException;
 import sistemadevendas.exceptions.FalhaProdutoException;
 import sistemadevendas.exceptions.IdNegativoException;
 import sistemadevendas.exceptions.NaoEncontradoException;
-import sistemadevendas.exceptions.ProdutoExisteException;
 import sistemadevendas.model.Produto;
 import sistemadevendas.services.ProdutoService;
 

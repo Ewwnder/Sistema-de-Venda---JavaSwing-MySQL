@@ -10,6 +10,9 @@ public class Produto {
     private double precoVenda;
     private int quantidade;
 
+    private int quantidade;
+
+
     public int getIdProduto() {
         return idProduto;
     }
@@ -49,6 +52,13 @@ public class Produto {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+<<<<<<< HEAD
+=======
+    @Override
+    public String toString() {
+        return nomeProduto;
+    }
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
 
     
     

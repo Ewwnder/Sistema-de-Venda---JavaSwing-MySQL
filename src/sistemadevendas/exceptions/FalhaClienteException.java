@@ -9,11 +9,11 @@ package sistemadevendas.exceptions;
  *
  * @author LucasMorais
  */
-public class IdClienteInvalidoException extends Exception{
+public class FalhaClienteException extends Exception{
 
-    public IdClienteInvalidoException(String message) {
-        super(message);
+    public FalhaClienteException(String message, Throwable ex) {
+        super(message, ex);
     }
-       
+    
     
 }

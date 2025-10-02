@@ -94,6 +94,7 @@
                                   <Component id="btnIrTelaPrincipal" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+<<<<<<< HEAD
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="btnLimparCampos" min="-2" max="-2" attributes="0"/>
@@ -108,6 +109,23 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+=======
+                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnLimparCampos" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnListarProdutos" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="btnAdicionarProduto" pref="147" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnEditarProdutos" min="-2" pref="129" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnRemoverProdutos" min="-2" pref="137" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
               </Group>
           </Group>
         </DimensionLayout>
@@ -126,11 +144,19 @@
                           <Component id="btnIrTelaPrincipal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+<<<<<<< HEAD
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtIdProdutoMostrar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+=======
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtIdProdutoMostrar" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtNomeProdutoMostrar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -158,8 +184,13 @@
                           <Component id="btnAdicionarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnListarProdutos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnEditarProdutos" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                       </Group>
                       <Component id="btnRemoverProdutos" alignment="0" min="-2" max="-2" attributes="0"/>
+=======
+                          <Component id="btnRemoverProdutos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -209,7 +240,10 @@
         <Component class="javax.swing.JButton" name="btnListarProdutos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Listar produtos"/>
+<<<<<<< HEAD
             <Property name="enabled" type="boolean" value="false"/>
+=======
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListarProdutosActionPerformed"/>

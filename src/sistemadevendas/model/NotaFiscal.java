@@ -11,8 +11,9 @@ public class NotaFiscal {
     private int idNotaFiscal;
     private Cliente cliente;
     private Date dataEmissao;
-    private double valorTotal;
+    private double valorTotal;  
 
+   
     public int getIdNotaFiscal() {
         return idNotaFiscal;
     }

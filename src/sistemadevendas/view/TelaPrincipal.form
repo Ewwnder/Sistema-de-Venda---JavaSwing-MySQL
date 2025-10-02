@@ -24,28 +24,67 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+=======
+              <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+              <Component id="btnClientes" min="-2" pref="147" max="-2" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <Component id="btnNotas" min="-2" pref="147" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="jLabel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="btnProdutos" min="-2" pref="147" max="-2" attributes="0"/>
+                  <EmptySpace pref="404" max="32767" attributes="0"/>
+              </Group>
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+=======
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="84" max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnClientes" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+                  <Component id="btnNotas" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+          </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="148" max="32767" attributes="0"/>
+                  <Component id="btnProdutos" min="-2" pref="67" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+              </Group>
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+<<<<<<< HEAD
     <Container class="javax.swing.JPanel" name="jPanel1">
 
       <Layout>
@@ -159,5 +198,41 @@
         </Component>
       </SubComponents>
     </Container>
+=======
+    <Component class="javax.swing.JButton" name="btnClientes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gerenciar Clientes"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClientesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnProdutos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gerenciar Produtos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProdutosActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnNotas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gerenciar Notas"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNotasActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="24" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="SISTEMA DE VENDAS - RYZEN IDIOMAS"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
   </SubComponents>
 </Form>

@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/controller/ProdutoController.java</file>
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/view/TelaPrincipal.java</file>
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/view/Clientes.java</file>
-            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/view/Produtos.java</file>
+            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/controller/ItemNotaFiscalController.java</file>
+            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/controller/NotaFiscalController.java</file>
+            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/controller/ClienteController.java</file>
+            <file>file:/C:/Users/User/Desktop/Fatec/LabBancoDeDados/Sistema%20de%20Venda/SistemaDeVendas/src/sistemadevendas/dao/ItemNotaFiscalDAO.java</file>
         </group>
     </open-files>
 </project-private>

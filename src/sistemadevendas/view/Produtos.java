@@ -6,8 +6,20 @@
 package sistemadevendas.view;
 
 import java.awt.event.ActionEvent;
+<<<<<<< HEAD
 import javax.swing.JOptionPane;
 import sistemadevendas.controller.ProdutoController;
+=======
+import java.text.DecimalFormat;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import sistemadevendas.controller.ProdutoController;
+import sistemadevendas.exceptions.ExistenteException;
+import sistemadevendas.exceptions.FalhaProdutoException;
+import sistemadevendas.exceptions.IdNegativoException;
+import sistemadevendas.exceptions.NaoEncontradoException;
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
 import sistemadevendas.model.Produto;
 
 /**
@@ -91,7 +103,10 @@ public class Produtos extends javax.swing.JFrame {
         jLabel4.setText("ID:");
 
         btnListarProdutos.setText("Listar produtos");
+<<<<<<< HEAD
         btnListarProdutos.setEnabled(false);
+=======
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
         btnListarProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListarProdutosActionPerformed(evt);
@@ -163,6 +178,7 @@ public class Produtos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscarProdutoPorId)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
                                 .addComponent(btnIrTelaPrincipal))))
                     .addGroup(painelClientesLayout.createSequentialGroup()
                         .addComponent(btnLimparCampos)
@@ -175,6 +191,21 @@ public class Produtos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoverProdutos)))
                 .addGap(53, 53, 53))
+=======
+                                .addComponent(btnIrTelaPrincipal)))
+                        .addGap(53, 53, 53))
+                    .addGroup(painelClientesLayout.createSequentialGroup()
+                        .addComponent(btnLimparCampos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnListarProdutos)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemoverProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
         );
         painelClientesLayout.setVerticalGroup(
             painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,10 +219,17 @@ public class Produtos extends javax.swing.JFrame {
                         .addComponent(txtIdProdutoBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnBuscarProdutoPorId)
                         .addComponent(btnIrTelaPrincipal)))
+<<<<<<< HEAD
                 .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdProdutoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+=======
+                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(txtIdProdutoMostrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
                 .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNomeProdutoMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -213,8 +251,13 @@ public class Produtos extends javax.swing.JFrame {
                     .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAdicionarProduto)
                         .addComponent(btnListarProdutos)
+<<<<<<< HEAD
                         .addComponent(btnEditarProdutos))
                     .addComponent(btnRemoverProdutos))
+=======
+                        .addComponent(btnEditarProdutos)
+                        .addComponent(btnRemoverProdutos)))
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -267,10 +310,21 @@ public class Produtos extends javax.swing.JFrame {
             novoProduto.setPrecoVenda(preco_venda);
 
             produtoController.adicionarProduto(novoProduto);
+<<<<<<< HEAD
 
             limparCampos(); 
         }catch(Exception e){
            JOptionPane.showMessageDialog(null, "Houve um erro ao adicionar: " + e.getMessage());
+=======
+            JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso!!!");
+            limparCampos(); 
+        } catch(ExistenteException e){
+             JOptionPane.showMessageDialog(this, "Erro ao adicionar produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(FalhaProdutoException e){
+             JOptionPane.showMessageDialog(this, "Erro ao adicionar produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(Exception e){
+           JOptionPane.showMessageDialog(this, "Erro ao adicionar produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
 
         }
         
@@ -284,6 +338,7 @@ public class Produtos extends javax.swing.JFrame {
        txtDescricaoProdutoMostrar.setText("");
        txtQuantidadeProdutoMostrar.setText("");
        txtPrecoVendaProdutoMostrar.setText("");
+<<<<<<< HEAD
        
         
           
@@ -296,6 +351,20 @@ public class Produtos extends javax.swing.JFrame {
 
             int id = Integer.parseInt(idString);
 
+=======
+    
+    }
+    
+    private void btnRemoverProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverProdutosActionPerformed
+       
+        String idString = txtIdProdutoBusca.getText().trim();
+        int id = -1;
+
+            
+      
+        try{
+            id = Integer.parseInt(idString);
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
             int confirm = JOptionPane.showConfirmDialog(this, "Deseja remover mesmo o produto?", "SIM", JOptionPane.YES_NO_OPTION);
 
             if (confirm==JOptionPane.YES_OPTION){
@@ -305,10 +374,24 @@ public class Produtos extends javax.swing.JFrame {
 
                 limparCampos();
             }
+<<<<<<< HEAD
         } catch (NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Digite um número válido para o ID");
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Erro ao remover o produto: " + e.getMessage());
+=======
+            
+        } catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (FalhaProdutoException e){
+             JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (NaoEncontradoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (IdNegativoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao remover produto - " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
         }
     }//GEN-LAST:event_btnRemoverProdutosActionPerformed
 
@@ -319,6 +402,7 @@ public class Produtos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "O ID NÃO PODE SER NULO OU VAZIO!");
             return;
         }
+<<<<<<< HEAD
         int id = Integer.parseInt(txtIdProdutoBusca.getText());
 
         if(id<0){
@@ -327,6 +411,11 @@ public class Produtos extends javax.swing.JFrame {
         }
 
         try {
+=======
+       
+        try {
+            int id = Integer.parseInt(txtIdProdutoBusca.getText());
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
             Produto p = produtoController.buscarProdutoPorId(id);
             txtIdProdutoMostrar.setText(String.valueOf(p.getIdProduto()));
             txtNomeProdutoMostrar.setText(p.getNomeProduto());
@@ -334,8 +423,21 @@ public class Produtos extends javax.swing.JFrame {
             txtQuantidadeProdutoMostrar.setText(String.valueOf(p.getQuantidade()));
             txtPrecoVendaProdutoMostrar.setText(String.valueOf(p.getPrecoVenda()));
 
+<<<<<<< HEAD
         } catch (Exception e){
             System.out.println("Houve algum erro: " + e.getMessage());
+=======
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (FalhaProdutoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (IdNegativoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (NaoEncontradoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e){
+           JOptionPane.showMessageDialog(this, "Erro ao buscar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
         }
     }//GEN-LAST:event_btnBuscarProdutoPorIdActionPerformed
 
@@ -344,6 +446,7 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeProdutoMostrarActionPerformed
 
     private void btnListarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarProdutosActionPerformed
+<<<<<<< HEAD
           /*
         ListagemClientes listaClientesFrame = new ListagemClientes();
         listaClientesFrame.setVisible(true);
@@ -366,6 +469,32 @@ public class Produtos extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao listar clientes: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }*/
+=======
+        ListagemProdutos listaProdutosFrame = new ListagemProdutos();
+        listaProdutosFrame.setVisible(true);
+        try {
+            ProdutoController produtoController = new ProdutoController();
+            List<Produto> produtos = produtoController.listarProdutos();
+
+            DefaultTableModel modelo = (DefaultTableModel) listaProdutosFrame.tabelaProdutos.getModel(); // Padrão q a internet recomenda, qualquer coisa trocar depois.
+            modelo.setRowCount(0);
+            DecimalFormat df = new DecimalFormat("R$ #,##0.00");
+            for (Produto p : produtos) {
+                modelo.addRow(new Object[]{
+                    p.getIdProduto(),
+                    p.getNomeProduto(),
+                    p.getDescricao(),
+                    df.format(p.getPrecoVenda()),
+                    p.getQuantidade()
+                });
+            }
+
+        } catch(FalhaProdutoException e ){
+            JOptionPane.showMessageDialog(this, "Erro ao listar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao listar produtos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
     }//GEN-LAST:event_btnListarProdutosActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
@@ -404,9 +533,23 @@ public class Produtos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Produto atualizado com sucesso!!!");
             limparCampos();
         } catch (NumberFormatException e) {
+<<<<<<< HEAD
             JOptionPane.showMessageDialog(this, "ID inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Erro ao editar o cliente: " + e.getMessage());
+=======
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch(ExistenteException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch(FalhaProdutoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch(IdNegativoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (NaoEncontradoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar produto: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro ao editar o produto: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+>>>>>>> b040bc436e583440d3963a9af864a8762b323cc8
         }
     }//GEN-LAST:event_btnEditarProdutosActionPerformed
 

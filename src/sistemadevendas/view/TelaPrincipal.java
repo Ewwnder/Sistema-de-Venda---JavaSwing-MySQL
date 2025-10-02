@@ -33,6 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         btnClientes.setText("Gerenciar Clientes");
         btnClientes.addActionListener(new java.awt.event.ActionListener() {

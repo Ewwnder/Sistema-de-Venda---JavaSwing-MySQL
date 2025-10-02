@@ -32,6 +32,7 @@ public class ListagemNF extends javax.swing.JFrame {
         tabelaNotas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Listagem de Notas");

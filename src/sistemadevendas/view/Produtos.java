@@ -62,6 +62,7 @@ public class Produtos extends javax.swing.JFrame {
         btnIrTelaPrincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel2.setText("Gerenciamento de Produtos");

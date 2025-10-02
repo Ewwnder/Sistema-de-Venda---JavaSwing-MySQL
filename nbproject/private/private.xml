@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/model/Produto.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/view/Produtos.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/view/Clientes.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/exceptions/NaoEncontradoException.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/view/ListagemNF.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/view/NotaFiscalView.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/exceptions/ExistenteException.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/exceptions/FalhaClienteException.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/model/Cliente.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/model/Estoque.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/controller/ClienteController.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/exceptions/FalhaProdutoException.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/exceptions/IdNegativoException.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/controller/ItemNotaFiscalController.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/dao/ItemNotaFiscalDAO.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/controller/ProdutoController.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/exceptions/FalhaNotaFiscalException.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/services/NotaFiscalService.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/view/ListagemItensNotaFiscal.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/dao/ClienteDAO.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/exceptions/AtualizacaoEstoqueNegativaException.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/controller/NotaFiscalController.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/exceptions/ProdutoExisteException.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/services/ClienteService.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/view/TelaPrincipal.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/view/ListagemProdutos.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/model/ItemNotaFiscal.java</file>
+            <file>file:/C:/Users/LucasMorais/Desktop/SISTEMAS%20DE%20VENDA%20-%20FINALIZAZDO/SistemaDeVendasJavaeSQL/src/sistemadevendas/view/ListagemClientes.java</file>
+        </group>
+    </open-files>
+</project-private>

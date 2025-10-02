@@ -266,9 +266,9 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="108" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnCadastrarNF" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnRemoverItemSelecionado" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCadastrarNF" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

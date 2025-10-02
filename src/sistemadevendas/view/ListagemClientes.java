@@ -6,7 +6,7 @@
 package sistemadevendas.view;
 
 /**
- *
+ *a
  * @author LucasMorais
  */
 public class ListagemClientes extends javax.swing.JFrame {

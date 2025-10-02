@@ -24,10 +24,11 @@ CREATE TABLE Nota_Fiscal(
 );
 
 CREATE TABLE Item_Nota_Fiscal(
-    PRIMARY KEY (id_nota_fiscal, id_produto);
+    
     id_nota_fiscal int,
     id_produto int,
     quantidade int check(quantidade>0),
+    PRIMARY KEY (id_nota_fiscal, id_produto),
     FOREIGN KEY(id_nota_fiscal) REFERENCES Nota_Fiscal(id_nota_fiscal),
     FOREIGN KEY(id_produto) REFERENCES Produto (id_produto)
 )

@@ -71,18 +71,22 @@ public class ProdutoService {
         return produtoDAO.listarProdutos();
     }
     
-    public void atualizarEstoque(Produto produto, int quantidade) throws FalhaProdutoException, NaoEncontradoException, AtualizacaoEstoqueNegativaException{
-            
-        if(produto.getQuantidade() - quantidade<0){
+    public boolean atualizarEstoque(Produto produto, int quantidade) throws FalhaProdutoException, NaoEncontradoException, AtualizacaoEstoqueNegativaException{
+        boolean success = produtoDAO.atualizarEstoqueSeSuficiente(produto.getIdProduto(), produto.getQuantidade() - quantidade);
+        if(!success){
             throw new AtualizacaoEstoqueNegativaException(produto.getIdProduto());
         }
-          
-        boolean success = produtoDAO.atualizarEstoque(produto, produto.getQuantidade() - quantidade);
         
-        if(!success){
-            throw new NaoEncontradoException("Produto", produto.getIdProduto());
-        }
-        
+        return success;
+    }
+    
+    public int verificarEstoque(Produto produto) throws FalhaProdutoException{
+        int quantidade = produtoDAO.verificarEstoque(produto);
+        return quantidade;
+    }
+
+    public boolean atualizarEstoqueSeSuficiente(int idProduto, int quantidade) throws FalhaProdutoException {
+        return produtoDAO.atualizarEstoqueSeSuficiente(idProduto, quantidade);
     }
     
 }

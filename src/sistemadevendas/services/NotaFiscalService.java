@@ -6,7 +6,6 @@
 package sistemadevendas.services;
 
 import java.util.List;
-import javax.swing.JOptionPane;
 import sistemadevendas.dao.NotaFiscalDAO;
 import sistemadevendas.exceptions.AtualizacaoEstoqueNegativaException;
 import sistemadevendas.exceptions.FalhaNotaFiscalException;
@@ -34,9 +33,9 @@ public class NotaFiscalService {
         
     }
     
-    public void criarNotaFiscal(NotaFiscal nf) throws FalhaNotaFiscalException, FalhaProdutoException, NaoEncontradoException, AtualizacaoEstoqueNegativaException {
-        produtoService.atualizarEstoque(nf.getProduto(), nf.getQuantidade());
-        nfDAO.criarNotaFiscal(nf);
+    public NotaFiscal criarNotaFiscal(NotaFiscal nf) throws FalhaNotaFiscalException, NaoEncontradoException {
+  
+        return nfDAO.criarNotaFiscal(nf);
         
        
    

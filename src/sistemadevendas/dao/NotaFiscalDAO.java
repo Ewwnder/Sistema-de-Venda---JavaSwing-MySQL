@@ -32,7 +32,7 @@ public class NotaFiscalDAO {
        }
     
     public NotaFiscal buscarNotaFiscalPorId(int id) throws FalhaNotaFiscalException{
-        String sql = "SELECT * FROM Nota_Fiscal WHERE id_nota_fiscal = ?";
+        String sql = "SELECT nf.*, c.nome_cliente FROM Nota_Fiscal nf JOIN Cliente c ON c.id_cliente = nf.id_cliente WHERE nf.id_nota_fiscal = ?";
         
         try(PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)){
             stmt.setInt(1, id);
@@ -44,6 +44,7 @@ public class NotaFiscalDAO {
             NotaFiscal nf = new NotaFiscal();
             Cliente cliente = new Cliente();
             cliente.setIdCliente(rs.getInt("id_cliente"));
+            cliente.setNomeCliente(rs.getString("nome_cliente"));
             nf.setIdNotaFiscal(id);
             nf.setCliente(cliente);
             java.util.Date utilDate = rs.getDate("data_emissao");
@@ -58,21 +59,21 @@ public class NotaFiscalDAO {
         }
     
     }     
-     public void criarNotaFiscal(NotaFiscal nf) throws FalhaNotaFiscalException{
-        String sql = "INSERT INTO Nota_Fiscal(id_cliente, id_produto, quantidade, data_emissao, valor_total) VALUES (?, ?, ?, ?, ?)";
+     public NotaFiscal criarNotaFiscal(NotaFiscal nf) throws FalhaNotaFiscalException{
+        String sql = "INSERT INTO Nota_Fiscal(id_cliente, data_emissao, valor_total) VALUES (?, ?, ?)";
     
-        try (PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
      
             stmt.setInt(1, nf.getCliente().getIdCliente());
-            stmt.setInt(2, nf.getProduto().getIdProduto());
-            stmt.setInt(3, nf.getQuantidade());
-            stmt.setDate(4, nf.getDataEmissao());
-            stmt.setDouble(5, nf.getValorTotal());
-
-          
+            stmt.setDate(2, nf.getDataEmissao());
+            stmt.setDouble(3, 0.0);
             stmt.executeUpdate();
-            
-           
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    nf.setIdNotaFiscal(rs.getInt(1));
+                }
+            }
+            return nf;
               
          }catch (SQLException ex) {
              throw new FalhaNotaFiscalException("Erro de SQL ao criar Nota Fiscal -" +ex.getMessage(), ex);
@@ -81,9 +82,7 @@ public class NotaFiscalDAO {
     }
     
     public List<NotaFiscal> listarNotasFiscais() throws FalhaNotaFiscalException{
-        String sql = "SELECT nf.id_nota_fiscal, nf.data_emissao, nf.quantidade, nf.valor_total, c.id_cliente, c.nome_cliente, p.id_produto, p.nome_produto FROM nota_fiscal nf "
-                + "JOIN cliente c ON nf.id_cliente = c.id_cliente "
-                + "JOIN produto p ON nf.id_produto = p.id_produto";
+        String sql = "SELECT nota_fiscal.*, cliente.nome_cliente FROM nota_fiscal JOIN cliente ON cliente.id_cliente = nota_fiscal.id_cliente";
         List<NotaFiscal> listaNfs = new ArrayList<NotaFiscal>();
         
         try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
@@ -93,16 +92,10 @@ public class NotaFiscalDAO {
                  Cliente cliente = new Cliente();
                  cliente.setIdCliente(rs.getInt("id_cliente"));
                  cliente.setNomeCliente(rs.getString("nome_cliente"));
-                 
-                 Produto produto = new Produto();
-                 produto.setIdProduto(rs.getInt("id_produto"));
-                 produto.setNomeProduto(rs.getString("nome_produto"));
-                 
                  NotaFiscal nf = new NotaFiscal();
                  nf.setIdNotaFiscal(rs.getInt("id_nota_fiscal"));
                  nf.setCliente(cliente);
-                 nf.setProduto(produto);
-                 nf.setQuantidade(rs.getInt("quantidade"));
+                 
                  nf.setDataEmissao(rs.getDate("data_emissao"));
                  nf.setValorTotal(rs.getDouble("valor_total"));
                  

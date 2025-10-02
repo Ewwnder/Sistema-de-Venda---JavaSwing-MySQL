@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sistemadevendas.exceptions.AtualizacaoEstoqueNegativaException;
+import sistemadevendas.exceptions.FalhaItemNotaFiscalException;
 import sistemadevendas.exceptions.FalhaNotaFiscalException;
 import sistemadevendas.exceptions.FalhaProdutoException;
 import sistemadevendas.exceptions.IdNegativoException;
 import sistemadevendas.exceptions.NaoEncontradoException;
+import sistemadevendas.model.ItemNotaFiscal;
 import sistemadevendas.model.NotaFiscal;
 import sistemadevendas.services.NotaFiscalService;
-
+import sistemadevendas.services.ItemNotaFiscalService;
 
 
 /**
@@ -20,6 +22,7 @@ import sistemadevendas.services.NotaFiscalService;
  */
 public class NotaFiscalController {
     private NotaFiscalService notaFiscalService = new NotaFiscalService();
+    private ItemNotaFiscalService itemNotaFiscalService = new ItemNotaFiscalService();
     
     public NotaFiscal buscarNotaFiscalPorId(int id) throws IdNegativoException, FalhaNotaFiscalException, NaoEncontradoException{
             
@@ -29,12 +32,18 @@ public class NotaFiscalController {
             return notaFiscalService.buscarNotaFiscalPorId(id);
     }
     
-    public void criarNotaFiscal(NotaFiscal nf) throws FalhaNotaFiscalException, FalhaProdutoException, NaoEncontradoException, AtualizacaoEstoqueNegativaException{
+    public void criarNotaFiscal(NotaFiscal nf, List<ItemNotaFiscal> itens) throws FalhaNotaFiscalException, FalhaProdutoException, NaoEncontradoException, AtualizacaoEstoqueNegativaException, FalhaItemNotaFiscalException{
         if(nf == null){
             throw new NullPointerException("A nota fiscal enviada é nula.");
         }
         
-        notaFiscalService.criarNotaFiscal(nf);
+        nf = notaFiscalService.criarNotaFiscal(nf);
+        
+        for(ItemNotaFiscal item : itens){
+            item.setNotaFiscal(nf);
+        }
+        itemNotaFiscalService.criarItemNotaFiscal(itens);
+        
         
        
     }

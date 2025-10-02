@@ -7,20 +7,27 @@ package sistemadevendas.view;
 
 import java.sql.Date;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistemadevendas.controller.ClienteController;
+import sistemadevendas.controller.ItemNotaFiscalController;
 import sistemadevendas.controller.NotaFiscalController;
 import sistemadevendas.controller.ProdutoController;
 import sistemadevendas.exceptions.AtualizacaoEstoqueNegativaException;
 import sistemadevendas.exceptions.FalhaClienteException;
+import sistemadevendas.exceptions.FalhaItemNotaFiscalException;
 import sistemadevendas.exceptions.FalhaNotaFiscalException;
 import sistemadevendas.exceptions.FalhaProdutoException;
 import sistemadevendas.exceptions.NaoEncontradoException;
 import sistemadevendas.model.Cliente;
+import sistemadevendas.model.ItemNotaFiscal;
 import sistemadevendas.model.NotaFiscal;
 import sistemadevendas.model.Produto;
 import sistemadevendas.services.ClienteService;
@@ -90,10 +97,13 @@ public class NotaFiscalView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaNotas = new javax.swing.JTable();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel2 = new javax.swing.JLabel();
         painelClientes = new javax.swing.JPanel();
-        btnAdicionarNF = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        btnAdicionarNF = new javax.swing.JButton();
         btnListarNotas = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtDataEmissao = new javax.swing.JTextField();
@@ -104,20 +114,60 @@ public class NotaFiscalView extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         qtdProduto = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabelaItems = new javax.swing.JTable();
+        btnCadastrarNF = new javax.swing.JButton();
+        btnAdicionarItem = new javax.swing.JButton();
+        btnAdicionarNF1 = new javax.swing.JButton();
+        idNF = new javax.swing.JLabel();
+        idBuscar = new javax.swing.JTextField();
+        btnConsultar = new javax.swing.JButton();
+        totalProdutoTxt = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        valorUnitarioTxt = new javax.swing.JTextField();
+        btnRemoverItemSelecionado = new javax.swing.JButton();
+
+        tabelaNotas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID_NF", "Nome Cliente", "Nome do Produto", "Data", "Quantidade", "Valor Total"
+            }
+        ));
+        jScrollPane2.setViewportView(tabelaNotas);
+
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel2.setText("Gerenciamento de NF");
 
+        jLabel3.setText("Nome Cliente:");
+
         btnAdicionarNF.setText("Salvar NF");
+        btnAdicionarNF.setAlignmentY(0.0F);
         btnAdicionarNF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarNFActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Nome Cliente:");
 
         btnListarNotas.setText("Listar Notas");
         btnListarNotas.addActionListener(new java.awt.event.ActionListener() {
@@ -152,39 +202,172 @@ public class NotaFiscalView extends javax.swing.JFrame {
 
         jLabel9.setText("Quantidade:");
 
+        qtdProduto.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                qtdProdutoCaretUpdate(evt);
+            }
+        });
+        qtdProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                qtdProdutoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                qtdProdutoFocusLost(evt);
+            }
+        });
+        qtdProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                qtdProdutoMouseExited(evt);
+            }
+        });
+        qtdProduto.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                qtdProdutoInputMethodTextChanged(evt);
+            }
+        });
+        qtdProduto.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                qtdProdutoPropertyChange(evt);
+            }
+        });
+        qtdProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                qtdProdutoKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                qtdProdutoKeyTyped(evt);
+            }
+        });
+
+        tabelaItems.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Produto", "Nome do Produto", "Valor Unitário", "Quantidade", "Valor Total"
+            }
+        ));
+        jScrollPane3.setViewportView(tabelaItems);
+
+        btnCadastrarNF.setText("Cadastrar NF");
+        btnCadastrarNF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarNFActionPerformed(evt);
+            }
+        });
+
+        btnAdicionarItem.setText("Adicionar Item");
+        btnAdicionarItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarItemActionPerformed(evt);
+            }
+        });
+
+        btnAdicionarNF1.setText("Salvar NF");
+        btnAdicionarNF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarNF1ActionPerformed(evt);
+            }
+        });
+
+        idNF.setText("ID NF:");
+
+        btnConsultar.setText("Consultar Nota Fiscal");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
+        totalProdutoTxt.setBackground(new java.awt.Color(204, 204, 204));
+        totalProdutoTxt.setFocusable(false);
+
+        jLabel10.setText("Valor Unitário:");
+
+        jLabel11.setText("Total:");
+
+        valorUnitarioTxt.setBackground(new java.awt.Color(204, 204, 204));
+        valorUnitarioTxt.setFocusable(false);
+
+        btnRemoverItemSelecionado.setText("Remover Item Selecionado");
+        btnRemoverItemSelecionado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverItemSelecionadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelClientesLayout = new javax.swing.GroupLayout(painelClientes);
         painelClientes.setLayout(painelClientesLayout);
         painelClientesLayout.setHorizontalGroup(
             painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelClientesLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelClientesLayout.createSequentialGroup()
-                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnIrTelaPrincipal)
-                        .addGap(53, 53, 53))
                     .addGroup(painelClientesLayout.createSequentialGroup()
-                        .addComponent(btnLimparCampos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnListarNotas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(1337, 1337, 1337)
                         .addComponent(btnAdicionarNF, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(painelClientesLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnIrTelaPrincipal)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(painelClientesLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(painelClientesLayout.createSequentialGroup()
+                        .addComponent(btnCadastrarNF)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRemoverItemSelecionado))
+                    .addComponent(btnAdicionarItem, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelClientesLayout.createSequentialGroup()
+                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelClientesLayout.createSequentialGroup()
+                                .addComponent(idNF, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(painelClientesLayout.createSequentialGroup()
+                                        .addComponent(idBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnConsultar)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5))
+                            .addGroup(painelClientesLayout.createSequentialGroup()
+                                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(painelClientesLayout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(20, 20, 20)
+                                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(painelClientesLayout.createSequentialGroup()
+                                        .addComponent(btnListarNotas)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnLimparCampos))
+                                    .addGroup(painelClientesLayout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(valorUnitarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(jLabel11)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(totalProdutoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelClientesLayout.createSequentialGroup()
+                    .addContainerGap(1337, Short.MAX_VALUE)
+                    .addComponent(btnAdicionarNF1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         painelClientesLayout.setVerticalGroup(
             painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,46 +375,72 @@ public class NotaFiscalView extends javax.swing.JFrame {
                 .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelClientesLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(btnIrTelaPrincipal))
+                        .addComponent(btnIrTelaPrincipal)
+                        .addGap(367, 367, 367)
+                        .addComponent(btnAdicionarNF))
                     .addGroup(painelClientesLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(22, 22, 22)
+                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(idNF)
+                            .addComponent(idBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConsultar)
+                            .addComponent(txtDataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
                         .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnListarNotas)
+                                .addComponent(btnLimparCampos)))
+                        .addGap(123, 123, 123)
+                        .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(qtdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(totalProdutoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(valorUnitarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAdicionarItem)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtDataEmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnListarNotas)
-                    .addComponent(btnLimparCampos)
-                    .addComponent(btnAdicionarNF))
-                .addContainerGap(50, Short.MAX_VALUE))
+                            .addComponent(btnCadastrarNF)
+                            .addComponent(btnRemoverItemSelecionado))))
+                .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(painelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelClientesLayout.createSequentialGroup()
+                    .addContainerGap(402, Short.MAX_VALUE)
+                    .addComponent(btnAdicionarNF1)
+                    .addGap(1, 1, 1)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(305, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
-            .addComponent(painelClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(painelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(166, 166, 166))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(painelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -246,60 +455,7 @@ public class NotaFiscalView extends javax.swing.JFrame {
     } 
    
     private void btnAdicionarNFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarNFActionPerformed
-                                              
-    try {
-     
-        Cliente clienteSelecionado = (Cliente) txtCliente.getSelectedItem();
-        Produto produtoSelecionado = (Produto) txtProduto.getSelectedItem();
-
-        if (clienteSelecionado == null || produtoSelecionado == null) {
-            JOptionPane.showMessageDialog(this, "Selecione cliente e produto!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-
-        int quantidade = Integer.parseInt(qtdProduto.getText());
-
-        if (quantidade <= 0) {
-            JOptionPane.showMessageDialog(this, "Quantidade deve ser maior que zero!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        double valorTotal = produtoSelecionado.getPrecoVenda() * quantidade;
-        String dataStr = txtDataEmissao.getText(); 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date utilDate = sdf.parse(dataStr);
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        
-        NotaFiscal nf = new NotaFiscal();
-        nf.setCliente(clienteSelecionado);
-        nf.setProduto(produtoSelecionado);
-        nf.setQuantidade(quantidade);
-        nf.setDataEmissao(sqlDate);
-        nf.setValorTotal(valorTotal);
-
-       
-        NotaFiscalController controller = new NotaFiscalController();
-        controller.criarNotaFiscal(nf);
-
-        JOptionPane.showMessageDialog(this, "Nota Fiscal criada com sucesso!");
-
-      
-        qtdProduto.setText("");
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Quantidade inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
-    } catch (AtualizacaoEstoqueNegativaException e){
-         JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-    } catch (FalhaNotaFiscalException e){
-        JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
-    } catch (FalhaProdutoException e ) {
-        JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
-    } catch (NaoEncontradoException e){
-        JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao criar nota fiscal: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-    }
+   
     }//GEN-LAST:event_btnAdicionarNFActionPerformed
 
     private void btnListarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarNotasActionPerformed
@@ -319,10 +475,8 @@ public class NotaFiscalView extends javax.swing.JFrame {
                 modelo.addRow(new Object[]{
                   
                      nf.getIdNotaFiscal(),
-                     nf.getCliente().getNomeCliente(),
-                     nf.getProduto().getNomeProduto(),
+                     nf.getCliente().getNomeCliente(), 
                      nf.getDataEmissao(),
-                     nf.getQuantidade(),
                      df.format(nf.getValorTotal())
                 });
             }
@@ -349,6 +503,220 @@ public class NotaFiscalView extends javax.swing.JFrame {
     private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClienteActionPerformed
+
+    private void btnCadastrarNFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarNFActionPerformed
+       DefaultTableModel modelo = (DefaultTableModel) tabelaItems.getModel();
+       List<ItemNotaFiscal> lista_itens = new ArrayList<ItemNotaFiscal>();
+       DecimalFormat df = new DecimalFormat("R$ #,##0.00");
+       NotaFiscal notaFiscal = new NotaFiscal();
+       Number unitarioNumber =0;
+       try{
+        String dataStr = txtDataEmissao.getText(); 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date utilDate;
+
+        utilDate = sdf.parse(dataStr);
+
+
+
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        Cliente clienteSelecionado = (Cliente) txtCliente.getSelectedItem(); 
+
+        notaFiscal.setCliente(clienteSelecionado);
+        notaFiscal.setDataEmissao(sqlDate);
+        for(int i=0; i<modelo.getRowCount(); i++){
+
+            int idProduto = Integer.parseInt(modelo.getValueAt(i,0).toString());
+            unitarioNumber = df.parse(modelo.getValueAt(i,2).toString());
+            double valorUnitario = unitarioNumber.doubleValue();
+
+            int quantidade = Integer.parseInt(modelo.getValueAt(i,3).toString());
+
+            Produto produto = new Produto();
+            produto.setIdProduto(idProduto);
+            produto.setPrecoVenda(valorUnitario);
+
+            ItemNotaFiscal itemNF = new ItemNotaFiscal();
+            itemNF.setNotaFiscal(notaFiscal);
+            itemNF.setProduto(produto);
+            itemNF.setQuantidade(quantidade);
+            lista_itens.add(itemNF);
+       }
+       
+           NotaFiscalController notaFiscalController = new NotaFiscalController();
+           notaFiscalController.criarNotaFiscal(notaFiscal, lista_itens);
+           
+           
+       }catch(ParseException e){
+            JOptionPane.showMessageDialog(this, "Erro no parse: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+       }catch(AtualizacaoEstoqueNegativaException e){
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar item na nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+       }catch(FalhaItemNotaFiscalException e){
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar item na nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+       }catch(FalhaProdutoException e){
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar item na nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+       }catch(FalhaNotaFiscalException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar item na nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+       }catch (NaoEncontradoException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar item na nota fiscal: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+       }
+        
+    }//GEN-LAST:event_btnCadastrarNFActionPerformed
+
+    private void btnAdicionarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarItemActionPerformed
+        int quantidade = Integer.parseInt(qtdProduto.getText());
+        Produto produtoSelecionado = (Produto) txtProduto.getSelectedItem();    
+        DecimalFormat df = new DecimalFormat("R$ #,##0.00");
+        if (quantidade <= 0) {
+            JOptionPane.showMessageDialog(this, "Quantidade deve ser maior que zero!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (produtoSelecionado == null) {
+            JOptionPane.showMessageDialog(this, "Selecione o produto!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+         boolean produtoNaTabela = false;
+         DefaultTableModel modelo = (DefaultTableModel) tabelaItems.getModel();// Padrão q a internet recomenda, qualquer coisa trocar depois.
+       
+         
+         if(modelo.getRowCount()>0){
+             for (int i = 0; i < modelo.getRowCount(); i++){
+                int idTabela = Integer.parseInt(modelo.getValueAt(i,0).toString());
+
+                if(idTabela == produtoSelecionado.getIdProduto()){
+                    produtoNaTabela = true;
+                    int qtdProdutoNaTabela = Integer.parseInt(modelo.getValueAt(i,3).toString());
+                    int qtdNova = qtdProdutoNaTabela + quantidade;
+                    modelo.setValueAt(qtdNova, i, 3);
+                    Number unitarioNumber =0;
+                    try{
+                       unitarioNumber = df.parse(modelo.getValueAt(i, 2).toString());
+                    }catch(ParseException e){
+                        JOptionPane.showMessageDialog(null,"Erro ao fazer o parse da tabela: " + e.getMessage());
+                    }
+
+                    double valorUnitario = unitarioNumber.doubleValue();
+                    modelo.setValueAt(df.format(valorUnitario * qtdNova), i, 4);
+                    break;
+             }
+         }
+         }
+         
+         
+        double valorUnitario = produtoSelecionado.getPrecoVenda();
+        valorUnitarioTxt.setText(String.valueOf(produtoSelecionado.getPrecoVenda())); 
+        
+        double valorTotal = valorUnitario * quantidade;
+        totalProdutoTxt.setText(String.valueOf(valorTotal));
+        
+       
+        
+        if(!produtoNaTabela){
+            modelo.addRow(new Object[]{
+                  
+            produtoSelecionado.getIdProduto(),
+            produtoSelecionado.getNomeProduto(),
+            df.format(valorUnitario),
+            quantidade,
+            df.format(valorTotal)
+                });
+        }
+        
+       
+        qtdProduto.setText("");
+        valorUnitarioTxt.setText("");
+        totalProdutoTxt.setText("");
+        
+    }//GEN-LAST:event_btnAdicionarItemActionPerformed
+
+    private void btnAdicionarNF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarNF1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdicionarNF1ActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        try {
+            int id = Integer.parseInt(idBuscar.getText());
+            NotaFiscalController notaFiscalController = new NotaFiscalController();
+            NotaFiscal nf = notaFiscalController.buscarNotaFiscalPorId(id);
+
+            BuscarNotaFiscalView buscarNotaFiscal = new BuscarNotaFiscalView();
+            
+           
+
+            List<ItemNotaFiscal> lista_items = new ArrayList<ItemNotaFiscal>();
+            ItemNotaFiscalController itemNFController = new ItemNotaFiscalController();
+            lista_items = itemNFController.listarNotasFiscais(nf);
+        
+            buscarNotaFiscal.preencherDadosNotaFiscal(nf, lista_items);
+            buscarNotaFiscal.setVisible(true);
+            
+
+        } catch(FalhaNotaFiscalException e){
+            JOptionPane.showMessageDialog(this, "Erro ao listar notas fiscais: " +e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);  
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao listar notas fiscais: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void qtdProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qtdProdutoKeyPressed
+      
+    }//GEN-LAST:event_qtdProdutoKeyPressed
+
+    private void qtdProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qtdProdutoKeyTyped
+        
+    }//GEN-LAST:event_qtdProdutoKeyTyped
+
+    private void qtdProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_qtdProdutoFocusLost
+        ignoreFirstCaretUpdate = true;
+    }//GEN-LAST:event_qtdProdutoFocusLost
+
+    private void qtdProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qtdProdutoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_qtdProdutoMouseExited
+
+    private void qtdProdutoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_qtdProdutoInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_qtdProdutoInputMethodTextChanged
+
+    private void qtdProdutoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_qtdProdutoPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_qtdProdutoPropertyChange
+    private boolean ignoreFirstCaretUpdate = true;
+    private void qtdProdutoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_qtdProdutoCaretUpdate
+        if (ignoreFirstCaretUpdate) {
+            ignoreFirstCaretUpdate = false;
+            return;
+        }
+        
+        Produto produtoSelecionado = (Produto) txtProduto.getSelectedItem();    
+        DecimalFormat df = new DecimalFormat("R$ #,##0.00");
+        double valorUnitario = produtoSelecionado.getPrecoVenda();
+        valorUnitarioTxt.setText(String.valueOf(produtoSelecionado.getPrecoVenda())); 
+        
+        if(qtdProduto.getText()=="" || qtdProduto.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Você deve digitar uma quantidade.");
+            return;
+        }
+        double valorTotal = valorUnitario * Double.parseDouble(qtdProduto.getText());
+        totalProdutoTxt.setText(String.valueOf(valorTotal));
+    }//GEN-LAST:event_qtdProdutoCaretUpdate
+
+    private void qtdProdutoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_qtdProdutoFocusGained
+          ignoreFirstCaretUpdate = true;
+    }//GEN-LAST:event_qtdProdutoFocusGained
+
+    private void btnRemoverItemSelecionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverItemSelecionadoActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tabelaItems.getModel(); 
+        int linhaSelecionada = tabelaItems.getSelectedRow(); 
+
+        if (linhaSelecionada != -1) { 
+            modelo.removeRow(linhaSelecionada);
+        }
+    }//GEN-LAST:event_btnRemoverItemSelecionadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -389,20 +757,36 @@ public class NotaFiscalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionarItem;
     private javax.swing.JButton btnAdicionarNF;
+    private javax.swing.JButton btnAdicionarNF1;
+    private javax.swing.JButton btnCadastrarNF;
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnIrTelaPrincipal;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnListarNotas;
+    private javax.swing.JButton btnRemoverItemSelecionado;
+    private javax.swing.JTextField idBuscar;
+    private javax.swing.JLabel idNF;
+    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel painelClientes;
     private javax.swing.JTextField qtdProduto;
+    public javax.swing.JTable tabelaItems;
+    public javax.swing.JTable tabelaNotas;
+    private javax.swing.JTextField totalProdutoTxt;
     private javax.swing.JComboBox<Cliente> txtCliente;
     private javax.swing.JTextField txtDataEmissao;
     private javax.swing.JComboBox<Produto> txtProduto;
+    private javax.swing.JTextField valorUnitarioTxt;
     // End of variables declaration//GEN-END:variables
 
     private Cliente buscarClientePorNome(String nomeCliente) {

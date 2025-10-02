@@ -6,19 +6,10 @@ package sistemadevendas.model;
  */
 public class ItemNotaFiscal {
     
-    private int idItemNotaFiscal;
     private NotaFiscal notaFiscal;
     private Produto produto;
     private int quantidade;
-    private double valorUnitario;
-
-    public int getIdItemNotaFiscal() {
-        return idItemNotaFiscal;
-    }
-
-    public void setIdItemNotaFiscal(int idItemNotaFiscal) {
-        this.idItemNotaFiscal = idItemNotaFiscal;
-    }
+   
 
     public NotaFiscal getNotaFiscal() {
         return notaFiscal;
@@ -44,13 +35,6 @@ public class ItemNotaFiscal {
         this.quantidade = quantidade;
     }
 
-    public double getValorUnitario() {
-        return valorUnitario;
-    }
-
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
-    }
     
     
 }

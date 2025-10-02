@@ -38,13 +38,13 @@ public class ListagemNF extends javax.swing.JFrame {
 
         tabelaNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID_NF", "Nome Cliente", "Nome do Produto", "Data", "Quantidade", "Valor Total"
+                "ID_NF", "Nome Cliente", "Data", "Valor Total"
             }
         ));
         jScrollPane2.setViewportView(tabelaNotas);

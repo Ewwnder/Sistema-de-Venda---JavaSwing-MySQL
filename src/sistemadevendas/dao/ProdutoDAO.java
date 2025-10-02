@@ -25,21 +25,21 @@ public class ProdutoDAO {
     }
     
     
-    public boolean atualizarEstoque(Produto produto, int estoque) throws FalhaProdutoException{
-        String sql = "UPDATE Produto SET quantidade = ? WHERE id_produto = ?";
-        
-        try (PreparedStatement stmt = this.conn.prepareStatement(sql)){
-            stmt.setInt(1, estoque);
-            stmt.setInt(2, produto.getIdProduto());
-            
-            int atualizado = stmt.executeUpdate();
-            return atualizado >0;
-            
-        } catch (SQLException ex){
-            throw new FalhaProdutoException("Erro de SQL ao atualizar estoque de produto - " + ex.getMessage(), ex);
-        }
-    }
+  public boolean atualizarEstoqueSeSuficiente(int idProduto, int quantidadeRequerida) throws FalhaProdutoException {
+    String sql = "UPDATE Produto SET quantidade = quantidade - ? WHERE id_produto = ? AND quantidade >= ?";
     
+    try (PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+        stmt.setInt(1, quantidadeRequerida);
+        stmt.setInt(2, idProduto);
+        stmt.setInt(3, quantidadeRequerida);
+        
+        int atualizado = stmt.executeUpdate();
+        return atualizado > 0; 
+        
+    } catch (SQLException ex) {
+        throw new FalhaProdutoException("Erro de SQL ao atualizar estoque de produto - " + ex.getMessage(), ex);
+    }
+}
     public void adicionarProduto(Produto produto) throws FalhaProdutoException {
         
         String sql = "INSERT INTO Produto (nome_produto, descricao, preco_venda, quantidade) VALUES (?, ?, ?, ?)";
@@ -150,8 +150,8 @@ public class ProdutoDAO {
         List<Produto> produtos = new ArrayList<Produto>();
         String sql = "SELECT * FROM Produto";
         
-        try (PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()){
+        try (PreparedStatement stmt = conn.prepareStatement(sql)){
+            ResultSet rs = stmt.executeQuery();
             
             while (rs.next()){
                 Produto produto = new Produto();
@@ -168,5 +168,26 @@ public class ProdutoDAO {
         }
         
         return produtos;
+    }
+
+    public int verificarEstoque(Produto produto) throws FalhaProdutoException {
+       String sql = "SELECT quantidade FROM produto WHERE id_produto = ?";
+       try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
+           stmt.setInt(1, produto.getIdProduto());
+           ResultSet rs = stmt.executeQuery();
+           
+             
+           if(!rs.first()){
+               return -1;
+           }
+      
+           int quantidade = rs.getInt("quantidade");
+          
+           
+           return quantidade;
+           
+       }catch(SQLException ex){
+           throw new FalhaProdutoException("Erro ao enviar estoque de produto - " + ex.getMessage(), ex);
+       }
     }
 }
